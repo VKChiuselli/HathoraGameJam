@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="241mm"
+   height="26mm"
+   viewBox="0 0 241 26"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="sign.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.60717618"
+     inkscape:cx="121.87566"
+     inkscape:cy="18.940137"
+     inkscape:window-width="958"
+     inkscape:window-height="1008"
+     inkscape:window-x="-7"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <rect
+       x="24.901104"
+       y="359.05786"
+       width="184.55809"
+       height="121.88411"
+       id="rect667" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.167159"
+       id="rect234-0"
+       width="17.533697"
+       height="6.0003772"
+       x="79.157143"
+       y="15.912227"
+       rx="3.1310155"
+       ry="3.700232" />
+    <rect
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.167159"
+       id="rect234-2"
+       width="17.533697"
+       height="6.0003772"
+       x="97.71595"
+       y="15.906955"
+       rx="3.1310155"
+       ry="3.700232" />
+    <rect
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.167159"
+       id="rect234-4"
+       width="17.533697"
+       height="6.0003772"
+       x="116.30449"
+       y="15.879397"
+       rx="3.1310155"
+       ry="3.700232" />
+    <rect
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.167159"
+       id="rect234-0-7"
+       width="17.533697"
+       height="6.0003772"
+       x="134.86406"
+       y="15.927875"
+       rx="3.1310155"
+       ry="3.700232" />
+    <rect
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.167159"
+       id="rect234-2-5"
+       width="17.533697"
+       height="6.0003772"
+       x="153.06863"
+       y="15.895106"
+       rx="3.1310155"
+       ry="3.700232" />
+    <rect
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.167159"
+       id="rect234-4-1"
+       width="17.533697"
+       height="6.0003772"
+       x="171.41316"
+       y="15.818004"
+       rx="3.1310155"
+       ry="3.700232" />
+    <rect
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.167159"
+       id="rect234-0-7-4"
+       width="17.533697"
+       height="6.0003772"
+       x="189.97273"
+       y="15.866488"
+       rx="3.1310155"
+       ry="3.700232" />
+    <rect
+       style="fill:#000000;fill-rule:evenodd;stroke-width:0.167159"
+       id="rect234-2-5-0"
+       width="17.533697"
+       height="6.0003772"
+       x="208.17731"
+       y="15.83372"
+       rx="3.1310155"
+       ry="3.700232" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.51285305,0,0,0.58467494,-10.710706,-213.24006)"
+       id="text665"
+       style="font-style:italic;font-weight:bold;font-size:12px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold Italic';white-space:pre;shape-inside:url(#rect667);display:inline;fill:#ffffff;fill-rule:evenodd;stroke-width:1.00157"
+       inkscape:label="text665"><tspan
+         x="24.900391"
+         y="388.25316"
+         id="tspan1471"><tspan
+           style="font-style:normal;font-weight:normal;font-size:32px;font-family:'Bell MT';-inkscape-font-specification:'Bell MT, Normal';fill:#000000"
+           id="tspan1467">Sign Here:</tspan><tspan
+           style="font-size:32px;fill:#000000"
+           id="tspan1469"> </tspan></tspan></text>
+  </g>
+</svg>
