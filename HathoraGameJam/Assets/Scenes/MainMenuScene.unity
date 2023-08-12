@@ -2894,7 +2894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hathoraClientConfig: {fileID: 11400000, guid: 758ef4b681567fb488c04c2dcf920e7a, type: 2}
-  hathoraClientSession: {fileID: 0}
+  hathoraClientSession: {fileID: 969486925}
   clientApis:
     clientAuthApi: {fileID: 969486928}
     clientLobbyApi: {fileID: 969486927}
