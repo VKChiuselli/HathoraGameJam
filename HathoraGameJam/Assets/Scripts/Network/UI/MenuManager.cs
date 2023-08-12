@@ -69,10 +69,13 @@ public class MenuManager : NetworkBehaviour
 
     }
 
-    string url = "";
+
 
     IEnumerator CreateRoom()
     {
+        string url = "  https://api.hathora.dev/rooms/v2/" + appId + "/create";
+  
+
         CreateLobbyRoomServerRpc(namePlayer);
  //       CreateLobbyRoom(namePlayer);
         RoomConfig config = new RoomConfig();
@@ -126,7 +129,7 @@ public class MenuManager : NetworkBehaviour
         thirdPanel.GetComponent<RoomPollingNetwork>().SetOfficeName(namePlayer + "'Office");
 
     // StartCoroutine(   CreateHathoraRoom());
-   //  StartCoroutine(   CreateHathoraLobby());
+     StartCoroutine(   CreateHathoraLobby());
      StartCoroutine(CallUpdateApp());
 
         secondPanel.SetActive(false);
