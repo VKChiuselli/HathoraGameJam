@@ -15,6 +15,7 @@ public class MenuManager : NetworkBehaviour
     [SerializeField] GameObject signatureText;
     [SerializeField] GameObject firstPanel;
     [SerializeField] GameObject secondPanel;
+    [SerializeField] GameObject thirdPanel;
     [SerializeField] GameObject CreateRoomButton;
     [SerializeField] GameObject LobbyRoom;
     [SerializeField] GameObject WhereSpawnLobbyRoom;
@@ -26,7 +27,7 @@ public class MenuManager : NetworkBehaviour
 
     private void Start()
     {
-
+        firstPanel.SetActive(true);
         startWorkButton.GetComponent<Button>().onClick.AddListener(() =>
         {
             StartWork();
@@ -121,5 +122,97 @@ public class MenuManager : NetworkBehaviour
     {
         Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
         LobbyRoom.GetComponent<LobbyRoom>().SetNameAndSize(namePlayer);
+        thirdPanel.SetActive(true);
+        thirdPanel.GetComponent<RoomPollingNetwork>().SetOfficeName(namePlayer + "'Office");
+
+    // StartCoroutine(   CreateHathoraRoom());
+   //  StartCoroutine(   CreateHathoraLobby());
+     StartCoroutine(CallUpdateApp());
+
+        secondPanel.SetActive(false);
     }
+
+    string appId = "app-018cc4c5-87e4-41ec-ad55-1617b7c8f783";
+
+  IEnumerator CreateHathoraLobby()
+    {
+        string url = " https://api.hathora.dev/lobby/" + appId + "/create";
+   
+
+        WWWForm form = new WWWForm();
+
+
+        using (UnityWebRequest www = UnityWebRequest.Post(url, form))
+        {
+            yield return www.SendWebRequest();
+
+
+            if(www.result!= UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("error sending message " + www.error);
+            }
+            else
+            {
+                Debug.Log("succes");
+                Debug.Log("response: " + www.downloadHandler.text);
+            }
+        }
+
+    }  
+
+      IEnumerator CallUpdateApp()
+    {
+        string url = "https://api.hathora.dev/apps/v1/update/" + appId;
+ 
+
+        WWWForm form = new WWWForm();
+
+        form.AddField("authConfiguration", "nickname");
+        form.AddField("appName", "gamejam");
+
+
+        using (UnityWebRequest www = UnityWebRequest.Post(url, form))
+        {
+            yield return www.SendWebRequest();
+
+
+            if(www.result!= UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("error sending message " + www.error);
+            }
+            else
+            {
+                Debug.Log("succes");
+                Debug.Log("response: " + www.downloadHandler.text);
+            }
+        }
+
+    }  
+    
+    
+    //IEnumerator CreateHathoraRoom()
+    //{
+    //    string url = "https://api.hathora.dev/rooms/v2/" + appId + "/create";
+
+
+    //    WWWForm form = new WWWForm();
+
+
+    //    using (UnityWebRequest www = UnityWebRequest.Post(url, form))
+    //    {
+    //        yield return www.SendWebRequest();
+
+
+    //        if(www.result!= UnityWebRequest.Result.Success)
+    //        {
+    //            Debug.LogError("error sending" + www.error);
+    //        }
+    //        else
+    //        {
+    //            Debug.Log("succes");
+    //            Debug.Log("response: " + www.downloadHandler.text);
+    //        }
+    //    }
+
+    //}
 }
