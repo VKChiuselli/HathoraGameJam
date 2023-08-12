@@ -14,56 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hathoraCoreOpts:
     _appId: 
-    _existingAppsSelectedIndex: 0
-    _existingAppsWithDeploymentWrapper:
-    - _appId: app-953e3651-4f94-45c0-937e-668aeded0987
-      _createdAtWrapper: 08/11/2023 12:50:47
-      _createdBy: 
-      _deletedBy: 
-      _deletedAtWrapper: 
-      _orgId: google-oauth2|113301678902523782953
-      _appSecret: secret-49c4cec8-0ae3-426d-aa26-55cb708dc636
-      _appName: hwtry
-      _deploymentWrapper:
-        _planName: 1
-        _transportType: 2
-        _roomsPerProcess: 1
-        _additionalContainerPorts: []
-        _defaultContainerPortWrapper:
-          _transportType: 2
-          _portNumber: 7777
-        _createdAtWrapper: 08/11/2023 13:17:32
-        _createdBy: vittorio.chiuselli@gmail.com
-        _requestedMemoryMB: 1024
-        _requestedCPU: 0.5
-        _deploymentId: 2
-        _buildId: 2
-        _appId: app-953e3651-4f94-45c0-937e-668aeded0987
-    - _appId: app-a0fd578e-c045-4774-ab76-d0e51a589046
-      _createdAtWrapper: 08/11/2023 11:19:50
-      _createdBy: 
-      _deletedBy: 
-      _deletedAtWrapper: 
-      _orgId: google-oauth2|113301678902523782953
-      _appSecret: secret-e5da1243-8c90-447c-a7e9-fd23121154ff
-      _appName: pushgame
-      _deploymentWrapper:
-        _planName: 1
-        _transportType: 2
-        _roomsPerProcess: 1
-        _additionalContainerPorts: []
-        _defaultContainerPortWrapper:
-          _transportType: 2
-          _portNumber: 7777
-        _createdAtWrapper: 08/11/2023 12:55:29
-        _createdBy: vittorio.chiuselli@gmail.com
-        _requestedMemoryMB: 1024
-        _requestedCPU: 0.5
-        _deploymentId: 3
-        _buildId: 4
-        _appId: app-a0fd578e-c045-4774-ab76-d0e51a589046
+    _existingAppsSelectedIndex: -1
+    _existingAppsWithDeploymentWrapper: []
     _devAuthOpts:
-      _devAuthToken: _OSahopWoTdV7yd0VX_ZXv0GPXDGuBXHpBKjijrs_rO8X
+      _devAuthToken: 
       _forceNewToken: 0
   _linuxHathoraAutoBuildOpts:
     _serverBuildDirName: Build-Server
