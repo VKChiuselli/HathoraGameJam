@@ -139,20 +139,22 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
         /// </summary>
         public async void OnViewLobbiesBtnClick()
         {
-            sdkDemoUi.viewLobbiesSeeLogsFadeTxt.text = "<color=yellow>Getting Lobbies...</color>";
-            _ = ShowFadeTxtThenFadeAsync(sdkDemoUi.viewLobbiesSeeLogsFadeTxt); // !await
+     //      sdkDemoUi.viewLobbiesSeeLogsFadeTxt.text = "<color=yellow>Getting Lobbies...</color>";
+   //         _ = ShowFadeTxtThenFadeAsync(sdkDemoUi.viewLobbiesSeeLogsFadeTxt); // !await
 
             // TODO: Get region from UI // TODO: Confirm null region returns ALL regions?
             Region? region = null;
 
             try
             {
-                await hathoraClientMgrBase.ViewPublicLobbies(region);
+                var lobbies =  await hathoraClientMgrBase.ViewPublicLobbies(region);
+
             }
             catch (Exception e)
             {
                 sdkDemoUi.viewLobbiesBtn.interactable = true;
             }
+             
         }
 
         public void OnCopyLobbyRoomIdBtnClick()

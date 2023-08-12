@@ -123,7 +123,7 @@ public class MenuManager : NetworkBehaviour
 
     private void CreateLobbyRoom(string namePlayer)
     {
-        Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
+      //  Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
         LobbyRoom.GetComponent<LobbyRoom>().SetNameAndSize(namePlayer);
         thirdPanel.SetActive(true);
         thirdPanel.GetComponent<RoomPollingNetwork>().SetOfficeName(namePlayer + "'Office");

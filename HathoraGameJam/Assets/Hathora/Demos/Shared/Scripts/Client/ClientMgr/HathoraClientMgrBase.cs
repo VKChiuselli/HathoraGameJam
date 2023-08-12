@@ -301,15 +301,19 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
 
             hathoraClientSession.Lobbies = lobbies;
             OnViewPublicLobbiesComplete(lobbies);
+            showRoomsAvaiableNetwork.SetLobbies(lobbies);
 
             return lobbies;
         }
-        
-        /// <summary>
-        /// Gets ip:port (+transport type) info so we can connect the Client via the selected transport (eg: Fishnet).
-        /// AKA "GetServerInfo" (from UI). Polls until status is `Active`: May take a bit!
-        /// </summary>
-        public async Task<ConnectionInfoV2> GetActiveConnectionInfo(
+
+        [SerializeField] ShowRoomsAvaiableNetwork showRoomsAvaiableNetwork;
+ 
+
+    /// <summary>
+    /// Gets ip:port (+transport type) info so we can connect the Client via the selected transport (eg: Fishnet).
+    /// AKA "GetServerInfo" (from UI). Polls until status is `Active`: May take a bit!
+    /// </summary>
+    public async Task<ConnectionInfoV2> GetActiveConnectionInfo(
             string _roomId, 
             CancellationToken _cancelToken = default)
         {
@@ -404,7 +408,6 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
             List<Lobby> sortedLobbies = _lobbies.OrderBy(lobby => lobby.CreatedAt).ToList();
             ClientMgrDemoUi.OnViewLobbies(sortedLobbies);
         }
-        
         /// <summary>
         /// On success, most users will want to call GetActiveConnectionInfo().
         /// </summary>
