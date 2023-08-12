@@ -1,25 +1,29 @@
-using System;
+
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 
-public class TimerUI : MonoBehaviour
+public class TimerUI : NetworkBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI timerText;
 
-    private float timeRemaining = 3*60;
+    private NetworkVariable<float> timeRemaining = new NetworkVariable<float>(3 * 60);
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        timeRemaining -= Time.deltaTime;
-        TimeSpan time = TimeSpan.FromSeconds(timeRemaining);
-        timerText.text = time .ToString(@"mm\:ss");
+        if (IsOwner)
+        {
+            timeRemaining.Value -= Time.deltaTime;
+        }
+        System.TimeSpan time = System.TimeSpan.FromSeconds(timeRemaining.Value);
+        timerText.text = time.ToString(@"mm\:ss");
     }
 }
