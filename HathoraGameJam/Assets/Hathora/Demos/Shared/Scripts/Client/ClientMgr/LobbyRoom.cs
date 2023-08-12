@@ -26,8 +26,14 @@ public class LobbyRoom : MonoBehaviour
     {
         lobby = lobbyFromUpdater;
         idRoom = lobby.RoomId;
+    
     }
 
+
+    public void JoinRoom()
+    {
+
+    }
 
     // Update is called once per frame
     void Update()
