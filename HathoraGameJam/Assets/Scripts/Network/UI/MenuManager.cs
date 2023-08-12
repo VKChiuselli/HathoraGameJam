@@ -129,8 +129,8 @@ public class MenuManager : NetworkBehaviour
         thirdPanel.GetComponent<RoomPollingNetwork>().SetOfficeName(namePlayer + "'Office");
 
     // StartCoroutine(   CreateHathoraRoom());
-     StartCoroutine(   CreateHathoraLobby());
-     StartCoroutine(CallUpdateApp());
+ //-   StartCoroutine(   CreateHathoraLobby());
+ //-   StartCoroutine(CallUpdateApp());
 
         secondPanel.SetActive(false);
     }
