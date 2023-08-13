@@ -246,3 +246,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9656bb2ac2b5a04ba867dc562558106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  howMuchPointGiveThisObject: 100
+  resetTime: 5

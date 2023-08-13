@@ -20,39 +20,38 @@ public class PlayerGainPoints : MonoBehaviour
         scoreBoard = GameObject.Find("ScoreBoardManagerCanvas").GetComponent<ScoreboardManager>();
     }
 
-    private void Update()
-    {
-        if (!isExhausted)
-        {
-            if (Input.GetKey(KeyCode.Q))
-            {
-                if (!qKeyHeld)
-                {
-                    qKeyHeld = true;
-                    holdStartTime = Time.time;
-                }
+    //private void Update()
+    //{
+    //    if (!isExhausted)
+    //    {
+    //        if (Input.GetKey(KeyCode.Q))
+    //        {
+    //            if (!qKeyHeld)
+    //            {
+    //                qKeyHeld = true;
+    //                holdStartTime = Time.time;
+    //            }
 
-                if (qKeyHeld && Time.time - holdStartTime >= holdDurationRequired)
-                {
+    //            if (qKeyHeld && Time.time - holdStartTime >= holdDurationRequired)
+    //            {
 
-                    MyMethodToCall();
-                }
-            }
-            else
-            {
-                qKeyHeld = false;
-            }
-        }
+    //                MyMethodToCall();
+    //            }
+    //        }
+    //        else
+    //        {
+    //            qKeyHeld = false;
+    //        }
+    //    }
       
-    }
+    //}
 
-    private void MyMethodToCall()
+
+    public void GainPoints(int amount)
     {
-        isExhausted = true;
-        Debug.Log("Q key held for 3 seconds!");
-        currentPoints = currentPoints + 10;
+        currentPoints = currentPoints + amount;
         scoreBoard.SetPlayerPoints(currentPoints);
-
-        //after 3 seconds put    isExhausted = false;
     }
+
+ 
 }
