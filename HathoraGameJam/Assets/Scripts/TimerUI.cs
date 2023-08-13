@@ -1,6 +1,3 @@
-
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -10,20 +7,34 @@ public class TimerUI : NetworkBehaviour
     [SerializeField]
     private TextMeshProUGUI timerText;
 
-    private NetworkVariable<float> timeRemaining = new NetworkVariable<float>(3 * 60);
-    void Start()
-    {
+    private float gameTime = 3 * 60;
+    private NetworkVariable<int> timeRemaining = new NetworkVariable<int>(3 * 60);
 
-    }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnNetworkSpawn()
     {
         if (IsOwner)
         {
-            timeRemaining.Value -= Time.deltaTime;
+            timeRemaining.OnValueChanged += (_, newValue) =>
+            {
+                System.TimeSpan time = System.TimeSpan.FromSeconds(newValue);
+                timerText.text = time.ToString(@"mm\:ss");
+            };
         }
-        System.TimeSpan time = System.TimeSpan.FromSeconds(timeRemaining.Value);
-        timerText.text = time.ToString(@"mm\:ss");
+
+    }
+
+
+    void Update()
+    {
+        if (IsServer)
+        {
+            gameTime -= Time.deltaTime;
+            var intTime = (int)gameTime;
+            if (timeRemaining.Value != intTime)
+            {
+                timeRemaining.Value = intTime;
+            }
+        }
     }
 }
