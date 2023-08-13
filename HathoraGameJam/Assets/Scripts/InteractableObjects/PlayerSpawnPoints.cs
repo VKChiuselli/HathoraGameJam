@@ -12,7 +12,7 @@ public class PlayerSpawnPoints : NetworkBehaviour
     GameObject TargetGroup;
     public override void OnNetworkSpawn()
     {
-        if (IsClient)
+        if (IsClient && IsOwner)
         {
             TargetGroup = GameObject.Find("Target Group");
             CinemachineTargetGroup cinemachineTargetGroup = TargetGroup.GetComponent<CinemachineTargetGroup>();

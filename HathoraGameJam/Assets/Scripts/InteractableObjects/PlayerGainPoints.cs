@@ -8,7 +8,7 @@ public class PlayerGainPoints : MonoBehaviour
 {
     private bool qKeyHeld = false;
     private float holdStartTime;
-    private float holdDurationRequired = 3.0f; // 3 seconds
+    private float holdDurationRequired = 1.0f; // 3 seconds
     ScoreboardManager scoreBoard;
     public int currentPoints;
     private bool isExhausted;

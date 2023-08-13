@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace HathoraGameJam.CubicleEscape
 {
-    public class RollingChairMovement : MonoBehaviour
+    public class RollingChairMovement : NetworkBehaviour
     {
         private Rigidbody rb;
         public InputActionReference moveAction;
@@ -23,13 +24,17 @@ namespace HathoraGameJam.CubicleEscape
 
         private void FixedUpdate()
         {
-            if (moveAction.action.IsInProgress())
+            if (IsClient && IsOwner)
             {
-                moveVector.x = moveAction.action.ReadValue<Vector2>().x;
-                moveVector.z = moveAction.action.ReadValue<Vector2>().y;
-                rb.AddForce(moveVector * moveForce * Time.deltaTime);
+                if (moveAction.action.IsInProgress())
+                {
+                    moveVector.x = moveAction.action.ReadValue<Vector2>().x;
+                    moveVector.z = moveAction.action.ReadValue<Vector2>().y;
+                    rb.AddForce(moveVector * moveForce * Time.deltaTime);
 
+                }
             }
+         
         }
     }
 }
