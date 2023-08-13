@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 7220526089254662914}
   - component: {fileID: 6782244374257657398}
   m_Layer: 5
-  m_Name: Clock/Timer placeholder
+  m_Name: Clock/Timer graphic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
