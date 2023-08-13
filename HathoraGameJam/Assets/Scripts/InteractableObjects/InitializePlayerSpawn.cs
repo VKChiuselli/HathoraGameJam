@@ -10,17 +10,25 @@ public class InitializePlayerSpawn : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
+        if (IsServer)
+        {
+            BossAI.Instance.OnPlayerJoined();
+        }
         if (IsClient && IsOwner)
         {
             SpawnChairServerRpc();
         }
-
-
-
-
     }
 
-    [ServerRpc(RequireOwnership =false)]
+    public override void OnNetworkDespawn()
+    {
+        if (IsServer)
+        {
+            BossAI.Instance.OnPlayerLeft();
+        }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
     private void SpawnChairServerRpc()
     {
         SpawnChairClientRpc();

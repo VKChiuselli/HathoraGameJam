@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/BossAITestOnline 1.unity
+    guid: 98b3939fd2728e340ad075a7baa9167c
+  - enabled: 1
     path: Assets/Scenes/ChairMovementTestOnline.unity
     guid: 44d32d13c27999549aad07671d000574
   - enabled: 0
