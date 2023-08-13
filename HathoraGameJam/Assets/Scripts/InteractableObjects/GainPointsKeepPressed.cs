@@ -4,15 +4,17 @@ using UnityEngine;
 using Unity.Netcode;
 using System;
 
-public class GainPointsKeepPressed : NetworkBehaviour
+public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 {
     private bool qKeyHeld = false;
-    private float holdStartTime;
-    private float holdDurationRequired = 1.0f; // 3 seconds
+ 
+    private float holdDurationRequired = 1.0f;  
     ScoreboardManager scoreBoard;
     public int howMuchPointGiveThisObject;
     NetworkVariable< bool> isExhausted = new NetworkVariable<bool>();
-
+    NetworkVariable< float> holdStartTimeNetwork = new NetworkVariable<float>();
+    float holdStartTime;
+    [SerializeField] GameObject progressBarUI;
   public  Material enabledItemMaterial;
   public  Material disableItemMaterial;
 
@@ -36,75 +38,126 @@ public class GainPointsKeepPressed : NetworkBehaviour
             {
                 if (!isExhausted.Value)
                 {
+                    SetProgressBarUI(holdStartTime, true);
                     if (Input.GetKey(KeyCode.Q))
                     {
                         if (!qKeyHeld)
                         {
                             qKeyHeld = true;
                             holdStartTime = Time.time;
+                            //            SetProgressBarUI(holdStartTime , true );
                         }
 
                         if (qKeyHeld && Time.time - holdStartTime >= holdDurationRequired)
                         {
-                          oneTime = true ;
+                            oneTime = true;
+                            SetProgressBarUI(holdStartTime, false);
                             IncreasePlayerPoints(other);
                             //  StartCoroutine(IncreasePlayerPoints(other));
                         }
                     }
                     else
                     {
+                        holdStartTime = 0;//reset the counter UI
+                        SetProgressBarUI(holdStartTime, false);
                         qKeyHeld = false;
                     }
                 }
             }
         }
-    
-  
+
+
     }
 
 
+    private void SetProgressBarUI(float holdStartTime, bool state)
+    {
+        if (!state)
+        {
+            progressBarUI.GetComponent<ProgressBarUI>().isOnline = false;
+            progressBarUI.SetActive(state);
+            return;
+        }
+        else
+        {
+            progressBarUI.SetActive(state);
+             Debug.Log("holdStartTime  " + holdStartTime);
+    //       
+            progressBarUI.GetComponent<ProgressBarUI>().isOnline = true; 
+            //TODO change value on the bar
+        }
+         
+    }
+
     private float timer = 0f;
-    private float interval = 10f; // 10 seconds interval
+    private float interval = 1f; // 10 seconds interval
 
     private void Update()
     {
-        timer += Time.deltaTime;
 
-        if (timer >= interval)
+        if (Input.GetKey(KeyCode.Q))
         {
-            // Call your function here
-            ResetObject();
+            if (progressBarUI.GetComponent<ProgressBarUI>().isOnline)
+            {
 
-            // Reset the timer
-            timer = 0f;
+                timer += Time.deltaTime;
+
+               
+                    // Call your function here
+                    //      ResetObject();
+                Debug.Log("  progressBarUI.GetComponent<ProgressBarUI>().barImage.fillAmount  " + progressBarUI.GetComponent<ProgressBarUI>().barImage.fillAmount);
+                    progressBarUI.GetComponent<ProgressBarUI>().slider.value = timer / holdDurationRequired;
+
+                // Reset the timer
+         
+                }
+
+        }
+        else
+        {
+            timer = 0;
+            progressBarUI.GetComponent<ProgressBarUI>().slider.value = 0;
         }
     }
 
-    private void ResetObject()
-    {
-        if (oneTime)
-        {
-            oneTime = false;
-       //     SetObjectStateServerRpc(oneTime);
-        }
-    }
+
+
+          
+
+     
+ 
 
     public float resetTime = 5f;
     private bool oneTime;
 
-    //IEnumerator IncreasePlayerPoints(Collider other)
+    public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
+
+    public override void OnNetworkSpawn()
+    {
+        isExhausted.OnValueChanged += isExhausted_OnValueChanged;
+     //   holdStartTimeNetwork.OnValueChanged += holdStartTimeNetwork_OnValueChanged;
+    }
+
+    //private void holdStartTimeNetwork_OnValueChanged(float previousValue, float newValue)
     //{
-    //    SetObjectStateServerRpc(true);
-    //    Debug.Log("Q key held for 1 second AND POINTS ARE GAINED!");
+    //     
+    //    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+    //    {
+    //        progressNormalized = holdStartTimeNetwork.Value / 1f
+    //    });
+    //}
 
-    //    other.gameObject.GetComponent<PlayerGainPoints>().GainPoints(howMuchPointGiveThisObject);
-
-    //    yield return new WaitForSeconds(resetTime);
-
-
-    //    SetObjectStateServerRpc(false); 
-
-    //} 
+    private void isExhausted_OnValueChanged(bool previousValue, bool newValue)
+    {
+        Debug.Log("isExhausted_OnValueChanged changed! keep pressed");
+        if (newValue)
+        {
+            OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
+            {
+                progressNormalized = 1f
+            });
+        }
+    }
 
     public void IncreasePlayerPoints(Collider other)
     {
