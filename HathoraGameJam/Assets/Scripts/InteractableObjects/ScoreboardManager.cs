@@ -31,17 +31,13 @@ public class ScoreboardManager : NetworkBehaviour
     [ServerRpc(RequireOwnership =false)]
     private void SetPlayerPointsServerRpc(int updatedAmount, ServerRpcParams serverRpcParams = default)
     {
-
-        playerPointsDictionary[serverRpcParams.Receive.SenderClientId] = updatedAmount;
-
-
-        UpdateScoreBoardUIClientRpc( );
+        UpdateScoreBoardUIClientRpc(updatedAmount, serverRpcParams.Receive.SenderClientId);
     }
 
     [ClientRpc]
-    private void UpdateScoreBoardUIClientRpc( )
+    private void UpdateScoreBoardUIClientRpc(int updatedAmount, ulong senderClientId)
     {
-
+        playerPointsDictionary[senderClientId] = updatedAmount;
         string result="";
         foreach (KeyValuePair<ulong, int> entry in playerPointsDictionary)
         {

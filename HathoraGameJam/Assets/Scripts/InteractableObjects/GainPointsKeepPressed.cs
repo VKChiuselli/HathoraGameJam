@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
-
+using System;
 
 public class GainPointsKeepPressed : NetworkBehaviour
 {
@@ -12,6 +12,9 @@ public class GainPointsKeepPressed : NetworkBehaviour
     ScoreboardManager scoreBoard;
     public int howMuchPointGiveThisObject;
     NetworkVariable< bool> isExhausted = new NetworkVariable<bool>();
+
+  public  Material enabledItemMaterial;
+  public  Material disableItemMaterial;
 
     private void Start()
     {
@@ -27,60 +30,109 @@ public class GainPointsKeepPressed : NetworkBehaviour
     private void OnTriggerStay(Collider other)
     {
 
-        if(other.tag=="Player")
+        if (!oneTime)
         {
-            if (!isExhausted.Value)
+            if (other.tag == "Player")
             {
-                if (Input.GetKey(KeyCode.Q))
+                if (!isExhausted.Value)
                 {
-                    if (!qKeyHeld)
+                    if (Input.GetKey(KeyCode.Q))
                     {
-                        qKeyHeld = true;
-                        holdStartTime = Time.time;
-                    }
+                        if (!qKeyHeld)
+                        {
+                            qKeyHeld = true;
+                            holdStartTime = Time.time;
+                        }
 
-                    if (qKeyHeld && Time.time - holdStartTime >= holdDurationRequired)
+                        if (qKeyHeld && Time.time - holdStartTime >= holdDurationRequired)
+                        {
+                          oneTime = true ;
+                            IncreasePlayerPoints(other);
+                            //  StartCoroutine(IncreasePlayerPoints(other));
+                        }
+                    }
+                    else
                     {
-
-                        StartCoroutine(IncreasePlayerPoints(other));
+                        qKeyHeld = false;
                     }
-                }
-                else
-                {
-                    qKeyHeld = false;
                 }
             }
         }
+    
   
     }
 
-    
+
+    private float timer = 0f;
+    private float interval = 10f; // 10 seconds interval
+
+    private void Update()
+    {
+        timer += Time.deltaTime;
+
+        if (timer >= interval)
+        {
+            // Call your function here
+            ResetObject();
+
+            // Reset the timer
+            timer = 0f;
+        }
+    }
+
+    private void ResetObject()
+    {
+        if (oneTime)
+        {
+            oneTime = false;
+       //     SetObjectStateServerRpc(oneTime);
+        }
+    }
 
     public float resetTime = 5f;
+    private bool oneTime;
 
-    IEnumerator IncreasePlayerPoints(Collider other)
+    //IEnumerator IncreasePlayerPoints(Collider other)
+    //{
+    //    SetObjectStateServerRpc(true);
+    //    Debug.Log("Q key held for 1 second AND POINTS ARE GAINED!");
+
+    //    other.gameObject.GetComponent<PlayerGainPoints>().GainPoints(howMuchPointGiveThisObject);
+
+    //    yield return new WaitForSeconds(resetTime);
+
+
+    //    SetObjectStateServerRpc(false); 
+
+    //} 
+
+    public void IncreasePlayerPoints(Collider other)
     {
         SetObjectStateServerRpc(true);
         Debug.Log("Q key held for 1 second AND POINTS ARE GAINED!");
 
         other.gameObject.GetComponent<PlayerGainPoints>().GainPoints(howMuchPointGiveThisObject);
-
-        yield return new WaitForSeconds(resetTime);
-
-
-        SetObjectStateServerRpc(false); 
+ 
 
     }
 
     [ServerRpc(RequireOwnership =false)]
     private void SetObjectStateServerRpc(bool setVariable)
     {
+        isExhausted.Value = setVariable;
         SetObjectStateClientRpc(setVariable);
     }
 
     [ClientRpc]
     private void SetObjectStateClientRpc(bool setVariable)
     {
-        isExhausted.Value = setVariable;
+        if (setVariable)
+        {
+            this.gameObject.GetComponent<MeshRenderer>().material = disableItemMaterial;
+        }
+        else
+        {
+            this.gameObject.GetComponent<MeshRenderer>().material = enabledItemMaterial;
+        }
     }
 }

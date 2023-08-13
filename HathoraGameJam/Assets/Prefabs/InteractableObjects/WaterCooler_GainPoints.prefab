@@ -247,4 +247,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   howMuchPointGiveThisObject: 100
+  enabledItemMaterial: {fileID: 2100000, guid: 2f834016e53f12c42a12baecd4450e34, type: 2}
+  disableItemMaterial: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   resetTime: 5
