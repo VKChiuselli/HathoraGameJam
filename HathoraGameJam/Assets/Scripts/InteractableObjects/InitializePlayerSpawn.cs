@@ -14,13 +14,9 @@ public class InitializePlayerSpawn : NetworkBehaviour
         {
             SpawnChairServerRpc();
         }
-
-
-
-
     }
 
-    [ServerRpc(RequireOwnership =false)]
+    [ServerRpc(RequireOwnership = false)]
     private void SpawnChairServerRpc()
     {
         SpawnChairClientRpc();
