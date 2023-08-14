@@ -7,53 +7,39 @@ using UnityEngine;
 public class PlayerInventory : NetworkBehaviour
 {
 
-    GameObject itemHolding;
-    private KeyCode keyToPress = KeyCode.E;
-    bool isHoldingItem;
+  public string itemName;
+  public bool isHoldingItem;
+
     void Start()
     {
-        
+        isHoldingItem = false;
+        itemName = "";
     }
 
-    // Update is called once per frame
     void Update()
     {
 
-
-        if (!isHoldingItem)
-        {
-            if (Input.GetKeyDown(keyToPress))
-            {
-
-            }
-        }
+ 
     }
 
-    public void AddItem(GameObject itemPassed)
+    public void AddItem(string itemPassed)
     {
         isHoldingItem = true;
-        //TODO show item
-        PickUpItem item = itemPassed.GetComponent<PickUpItem>();
-        //active attack action
-
-        //Destroy item
-        DestroyThisObjectServerRpc(item.NetworkObject);
+        itemName = itemPassed;
     }
 
-    [ServerRpc(RequireOwnership = false)]
-    private void DestroyThisObjectServerRpc(NetworkObjectReference itemToDestroy)
+    public void RemoveItem(string itemPassed)
     {
-
-        itemToDestroy.TryGet(out NetworkObject item);
-
-        if (item == null)
+        isHoldingItem = false;
+        if (itemPassed == itemName)
         {
-            return;
+            itemName = "";
         }
-
-        PickUpItem pickUpItem = item.GetComponent<PickUpItem>();
-
-        pickUpItem.DestroySelf();
-
+        else
+        {
+            Debug.LogError("trying to remove an object that is not holded");
+        }
     }
+
+
 }

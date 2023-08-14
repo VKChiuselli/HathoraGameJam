@@ -28,7 +28,12 @@ public class PickUpItem : NetworkBehaviour
             {
                 if (Input.GetKeyDown(keyToPress))
                 {
-                    DestroyThisObjectServerRpc();
+                    if (!currentPlayer.GetComponent<PlayerInventory>().isHoldingItem)
+                    {
+                        currentPlayer.GetComponent<PlayerInventory>().AddItem(itemName);
+                        DestroyThisObjectServerRpc();
+                    }
+                 
                     //currentPlayer.GetComponent<PlayerInventory>().AddItem( gameObject );
            
 
