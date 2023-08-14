@@ -246,4 +246,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94709821264068a439f90adbdc7882f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChairToSpawn: {fileID: 4647521542364711005, guid: 242699f90c7b2294b95e88c0c3ed7027, type: 3}
+  ChairToSpawn: {fileID: 6881852852180719722, guid: 90404d45b2a55e742986bd1590365d42, type: 3}
