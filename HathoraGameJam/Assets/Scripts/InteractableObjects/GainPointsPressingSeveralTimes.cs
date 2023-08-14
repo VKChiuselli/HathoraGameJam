@@ -15,7 +15,8 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
 
     public Material enabledItemMaterial;
     public Material disableItemMaterial;
-
+    [SerializeField] GameObject progressBarUI;
+     GameObject currentPlayerInteractable;
 
     private float timer = 0f;
     private float interval = 10f; // 10 seconds interval
@@ -59,8 +60,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
     public int keyPressCount = 0;
     public int targetKeyPresses = 5; // Number of times 'R' key needs to be pressed
     public KeyCode keyToPress = KeyCode.R; // Key you want to track
-
-
+    private bool playerCanPressKey;
 
     private void OnTriggerStay(Collider other)
     {
@@ -69,20 +69,8 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
         {
             if (other.tag == "Player")
             {
-                if (!isExhausted.Value)
-                {
-                    if (Input.GetKeyDown(keyToPress))
-                    {
-                        keyPressCount++;
-
-                        if (keyPressCount >= targetKeyPresses)
-                        {
-                            oneTime = true;
-                            IncreasePlayerPoints(other);
-                            keyPressCount = 0; // Reset the count after firing the function
-                        }
-                    }
-                }
+                playerCanPressKey = true;
+                currentPlayerInteractable = other.gameObject;
             }
         }
 
@@ -90,13 +78,74 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
     }
 
 
+    private void Update()
+    {
+        if (playerCanPressKey)
+        {
+            if (currentPlayerInteractable != null)
+            {
+                CounterKey(currentPlayerInteractable);
+            }
+        }
+    }
 
-    public void IncreasePlayerPoints(Collider other)
+    private void CounterKey( GameObject currentPlayer)
+    {
+        if (!isExhausted.Value)
+        {
+
+            if (Input.GetKeyDown(keyToPress))
+            {
+                keyPressCount++;
+                IncreaseProgressBar(keyPressCount);
+                if (keyPressCount >= targetKeyPresses)
+                {
+                    progressBarUI.SetActive(false);
+                    oneTime = true;
+                    IncreasePlayerPoints(currentPlayer);
+                    keyPressCount = 0; // Reset the count after firing the function
+                }
+            }
+        }
+        else
+        {
+            progressBarUI.GetComponent<ProgressBarUI>().slider.value = 0;
+            progressBarUI.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            playerCanPressKey = true;
+            progressBarUI.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            progressBarUI.GetComponent<ProgressBarUI>().slider.value = 0;
+            keyPressCount = 0;
+            progressBarUI.SetActive(false);
+            playerCanPressKey = false;
+        }
+    }
+
+    private void IncreaseProgressBar(int KeyPressCount)
+    {
+        progressBarUI.GetComponent<ProgressBarUI>().slider.value =((float) KeyPressCount / targetKeyPresses);
+    }
+
+    public void IncreasePlayerPoints(GameObject player)
     {
         SetObjectStateServerRpc(true);
         Debug.Log("R pressed 5 times AND POINTS ARE GAINED!");
 
-        other.gameObject.GetComponent<PlayerGainPoints>().GainPoints(howMuchPointGiveThisObject);
+
+        player.GetComponent<PlayerGainPoints>().GainPoints(howMuchPointGiveThisObject);
     }
 
     [ServerRpc(RequireOwnership = false)]

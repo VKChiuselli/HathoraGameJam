@@ -59,7 +59,7 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
                     else
                     {
                         holdStartTime = 0;//reset the counter UI
-                        SetProgressBarUI(holdStartTime, false);
+                   //     SetProgressBarUI(holdStartTime, false);
                         qKeyHeld = false;
                     }
                 }
@@ -68,6 +68,27 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 
 
     }
+
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            progressBarUI.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            progressBarUI.GetComponent<ProgressBarUI>().slider.value = 0;
+            progressBarUI.SetActive(false);
+        }
+    }
+
+
 
 
     private void SetProgressBarUI(float holdStartTime, bool state)
