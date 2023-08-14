@@ -8,7 +8,7 @@ using System;
 public class PickUpItem : NetworkBehaviour
 {
     [SerializeField] TextMeshProUGUI tooltipMessage;
-    [SerializeField] GameObject pickupbar;
+    [SerializeField] GameObject pickupui;
     [SerializeField] string itemName;
     GameObject currentPlayer;
     
@@ -79,7 +79,7 @@ public class PickUpItem : NetworkBehaviour
         {
             currentPlayer = other.gameObject;
             canPickup = true;
-            pickupbar.SetActive(true);
+            pickupui.SetActive(true);
         } 
     }
 
@@ -90,7 +90,7 @@ public class PickUpItem : NetworkBehaviour
         {
             currentPlayer = other.gameObject;
             canPickup = true;
-            pickupbar.SetActive(true);
+            pickupui.SetActive(true);
         }
     }
 
@@ -100,7 +100,7 @@ public class PickUpItem : NetworkBehaviour
         {
             currentPlayer = null;
             canPickup = false;
-            pickupbar.SetActive(false);
+            pickupui.SetActive(false);
         }
     }
 
