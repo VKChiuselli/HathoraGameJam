@@ -6,9 +6,7 @@ using System;
 
 public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
 {
-    private bool qKeyHeld = false;
-    private float holdStartTime;
-    private float holdDurationRequired = 1.0f; // 3 seconds
+ 
     ScoreboardManager scoreBoard;
     public int howMuchPointGiveThisObject;
     NetworkVariable<bool> isExhausted = new NetworkVariable<bool>();
@@ -37,13 +35,6 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
     private void isExhausted_OnValueChanged(bool previousValue, bool newValue)
     {
         Debug.Log("isExhausted_OnValueChanged changed! several time");
-        //if (newValue)
-        //{
-        //    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
-        //    {
-        //        progressNormalized = 1f
-        //    });
-        //}
     }
 
     private void Start()
@@ -68,7 +59,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
 
         if (!oneTime)
         {
-            if (other.tag == "Player")
+            if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
             {
                 playerCanPressKey = true;
                 currentPlayerInteractable = other.gameObject;
@@ -117,7 +108,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             playerCanPressKey = true;
             progressBarUI.SetActive(true);
@@ -126,7 +117,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             progressBarUI.GetComponent<ProgressBarUI>().slider.value = 0;
             keyPressCount = 0;
