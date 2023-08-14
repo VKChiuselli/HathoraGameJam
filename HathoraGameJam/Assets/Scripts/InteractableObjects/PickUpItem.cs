@@ -28,11 +28,20 @@ public class PickUpItem : NetworkBehaviour
             {
                 if (Input.GetKeyDown(keyToPress))
                 {
-                    if (!currentPlayer.GetComponent<PlayerInventory>().isHoldingItem)
+                    if (this.gameObject.tag == "Weapon")
                     {
-                        currentPlayer.GetComponent<PlayerInventory>().AddItem(itemName);
+                        if (!currentPlayer.GetComponent<PlayerInventory>().isHoldingItem)
+                        {
+                            currentPlayer.GetComponent<PlayerInventory>().AddItem(itemName);
+                            DestroyThisObjectServerRpc();
+                        }
+                    }
+                    else if (this.gameObject.tag == "Powerup")
+                    {
+                        currentPlayer.GetComponent<PlayerManager>().HandlePowerUp(itemName);
                         DestroyThisObjectServerRpc();
                     }
+                
                  
                     //currentPlayer.GetComponent<PlayerInventory>().AddItem( gameObject );
            
