@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3af751d10707541841d2e845c35505, type: 3}
+  m_Name: CoolDownState
+  m_EditorClassIdentifier: 
+  Action:
+  - {fileID: 11400000, guid: 2569807affddbce4b848c9a4797503fa, type: 2}
+  - {fileID: 11400000, guid: 77f70abdf7786b542a09b107f837f70f, type: 2}
+  Transitions:
+  - {fileID: 11400000, guid: a92247bff17e4e840bd51781c4347059, type: 2}
