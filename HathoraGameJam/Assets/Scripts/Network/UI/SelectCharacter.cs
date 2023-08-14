@@ -7,13 +7,22 @@ using UnityEngine.UI;
 
 public class SelectCharacter : MonoBehaviour
 {
-
-    [SerializeField] List<GameObject> characterList;
+    [SerializeField] Transform characterRoot;
+    [HideInInspector] public List<GameObject> characterList;
     [SerializeField]  GameObject  leftButton;
     [SerializeField]  GameObject  rightButton;
 
     public int indexCharacter;
 
+    private void Awake()
+    {
+        characterList = new List<GameObject>();
+        foreach (Transform child in characterRoot)
+        {
+            characterList.Add(child.gameObject);
+        }
+        Debug.Log(characterList.Count);
+    }
     private void Start()
     {
 
@@ -30,16 +39,20 @@ public class SelectCharacter : MonoBehaviour
     public void LeftButton()
     {
         indexCharacter = indexCharacter - 1;
+
         if (indexCharacter < 0)
         {
             indexCharacter = characterList.Count - 1;
         }
 
-            foreach(GameObject character in characterList)
-            {
-                character.SetActive(false);
-            }
-            characterList[indexCharacter].SetActive(true);
+        foreach(GameObject character in characterList)
+        {
+            character.SetActive(false);
+        }
+
+        characterList[indexCharacter].SetActive(true);
+
+        Debug.Log(indexCharacter);
           
     }
 
@@ -52,12 +65,15 @@ public class SelectCharacter : MonoBehaviour
             indexCharacter = 0;
         }
 
-            foreach(GameObject character in characterList)
-            {
-                character.SetActive(false);
-            }
-            characterList[indexCharacter].SetActive(true);
-          
+        foreach(GameObject character in characterList)
+        {
+            character.SetActive(false);
+        }
+
+        characterList[indexCharacter].SetActive(true);
+
+        Debug.Log(indexCharacter);
+
     }
 
 }

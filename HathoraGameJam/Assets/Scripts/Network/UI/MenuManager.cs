@@ -10,7 +10,7 @@ using Unity.Netcode;
 
 public class MenuManager : NetworkBehaviour
 {
-    [SerializeField] List<GameObject> characterList;
+    //[SerializeField] List<GameObject> characterList;
     [SerializeField] GameObject startWorkButton;
     [SerializeField] GameObject signatureText;
     [SerializeField] GameObject firstPanel;
@@ -22,7 +22,9 @@ public class MenuManager : NetworkBehaviour
 
 
     public string namePlayer;
-    public GameObject characterSelected;
+    public SelectCharacter selectCharacterScript;
+    public int selectedCharacterIndex = 0;
+    //public GameObject characterSelected;
 
 
     private void Start()
@@ -42,9 +44,9 @@ public class MenuManager : NetworkBehaviour
 
     public void StartWork()
     {
-        namePlayer = signatureText.GetComponent<TextMeshProUGUI>().text;
 
-        foreach (GameObject character in characterList)
+        //Commented this out to go with just getting the index from the 'SelectCharacter' script
+        /*foreach (GameObject character in characterList)
         {
             if (character.activeSelf)
             {
@@ -55,9 +57,10 @@ public class MenuManager : NetworkBehaviour
         if (characterSelected == null)
         {
             Debug.LogError("No character selected!");
-        }
+        }*/
 
-        namePlayer = signatureText.GetComponent<TextMeshProUGUI>().text;
+        namePlayer = signatureText.GetComponent<TMP_InputField>().text;
+        selectedCharacterIndex = selectCharacterScript.indexCharacter;
 
         if (namePlayer == "")
         {
