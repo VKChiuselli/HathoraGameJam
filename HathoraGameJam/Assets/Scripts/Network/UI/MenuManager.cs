@@ -7,6 +7,7 @@ using TMPro;
 using System.Text;
 using UnityEngine.Networking;
 using Unity.Netcode;
+using HathoraGameJam.CubicleEscape;
 
 public class MenuManager : NetworkBehaviour
 {
@@ -126,10 +127,12 @@ public class MenuManager : NetworkBehaviour
 
     private void CreateLobbyRoom(string namePlayer)
     {
-      //  Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
-        LobbyRoom.GetComponent<LobbyRoom>().SetNameAndSize(namePlayer);
+        //  Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
+        GameObject roomEntry = GameObject.Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
+        string capitalizedString = char.ToUpper(namePlayer[0]) + namePlayer.Substring(1);
+        roomEntry.GetComponent<RoomEntryPrefabLogic>().roomName.text = capitalizedString + " 's Office";
         thirdPanel.SetActive(true);
-        thirdPanel.GetComponent<RoomPollingNetwork>().SetOfficeName(namePlayer + "'Office");
+        thirdPanel.GetComponent<RoomPollingNetwork>().SetOfficeName(capitalizedString + " 's Office");
 
     // StartCoroutine(   CreateHathoraRoom());
  //-   StartCoroutine(   CreateHathoraLobby());
