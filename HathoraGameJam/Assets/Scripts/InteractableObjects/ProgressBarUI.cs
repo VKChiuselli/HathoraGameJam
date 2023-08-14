@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class ProgressBarUI : MonoBehaviour
 {
 
@@ -10,6 +10,7 @@ public class ProgressBarUI : MonoBehaviour
     [SerializeField] private GameObject hasProgressGameObject;
     [SerializeField] public Image barImage;
     [SerializeField] public  Slider slider;
+    [SerializeField] public  TextMeshProUGUI tooltipText;
     public bool isOnline;
 
     private IHasProgress hasProgress;

@@ -20,6 +20,7 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 
     private void Start()
     {
+        progressBarUI.GetComponent<ProgressBarUI>().tooltipText.text = "Hold Q";
         isExhausted.Value = false;
         if (howMuchPointGiveThisObject == 0)
         {

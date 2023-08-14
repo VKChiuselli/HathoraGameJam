@@ -195,6 +195,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProgressBarUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5464987534950780772, guid: ec7deaa2011ed004092f65a9c949ac82, type: 3}
+      propertyPath: messageToShow
+      value: Press R
+      objectReference: {fileID: 0}
     - target: {fileID: 8779480735034874409, guid: ec7deaa2011ed004092f65a9c949ac82, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
