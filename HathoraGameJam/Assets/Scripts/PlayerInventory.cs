@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerInventory : MonoBehaviour
+public class PlayerInventory : NetworkBehaviour
 {
 
     GameObject itemHolding;
@@ -25,5 +27,33 @@ public class PlayerInventory : MonoBehaviour
 
             }
         }
+    }
+
+    public void AddItem(GameObject itemPassed)
+    {
+        isHoldingItem = true;
+        //TODO show item
+        PickUpItem item = itemPassed.GetComponent<PickUpItem>();
+        //active attack action
+
+        //Destroy item
+        DestroyThisObjectServerRpc(item.NetworkObject);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void DestroyThisObjectServerRpc(NetworkObjectReference itemToDestroy)
+    {
+
+        itemToDestroy.TryGet(out NetworkObject item);
+
+        if (item == null)
+        {
+            return;
+        }
+
+        PickUpItem pickUpItem = item.GetComponent<PickUpItem>();
+
+        pickUpItem.DestroySelf();
+
     }
 }

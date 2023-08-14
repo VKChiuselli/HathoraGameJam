@@ -129,8 +129,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.3673, y: 3.11, z: 3.789262}
-  m_Center: {x: 0.38364995, y: 0.51925695, z: 0.4196309}
+  m_Size: {x: 5.0607843, y: 3.11, z: 3.3853006}
+  m_Center: {x: -0.26960802, y: 0.51925695, z: 0.21765012}
 --- !u!114 &7396473696241577059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +198,10 @@ PrefabInstance:
     - target: {fileID: 5464987534950780772, guid: ec7deaa2011ed004092f65a9c949ac82, type: 3}
       propertyPath: messageToShow
       value: Press R
+      objectReference: {fileID: 0}
+    - target: {fileID: 5702687966114692428, guid: ec7deaa2011ed004092f65a9c949ac82, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8779480735034874409, guid: ec7deaa2011ed004092f65a9c949ac82, type: 3}
       propertyPath: m_Pivot.x

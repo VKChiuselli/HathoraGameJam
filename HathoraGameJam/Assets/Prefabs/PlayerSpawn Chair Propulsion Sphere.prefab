@@ -19,8 +19,9 @@ GameObject:
   - component: {fileID: 8010098972627624695}
   - component: {fileID: 6973747771831844329}
   - component: {fileID: 8278511866389712612}
+  - component: {fileID: 8578381893710696465}
   m_Layer: 0
-  m_Name: Player Chair Propulsion Sphere
+  m_Name: PlayerSpawn Chair Propulsion Sphere
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -247,3 +248,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChairToSpawn: {fileID: 6881852852180719722, guid: 90404d45b2a55e742986bd1590365d42, type: 3}
+--- !u!114 &8578381893710696465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5384282797443370897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e06a8a82e3eae834f8dccd151c41353a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

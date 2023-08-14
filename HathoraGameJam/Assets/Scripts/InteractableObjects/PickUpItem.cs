@@ -9,7 +9,9 @@ public class PickUpItem : NetworkBehaviour
 {
     [SerializeField] TextMeshProUGUI tooltipMessage;
     [SerializeField] GameObject pickupbar;
+    [SerializeField] string itemName;
     GameObject currentPlayer;
+    
     void Start()
     {
         tooltipMessage.text = "Press E";
@@ -22,28 +24,37 @@ public class PickUpItem : NetworkBehaviour
     {
         if (canPickup)
         {
-            if (Input.GetKeyDown(keyToPress))
+            if (currentPlayer != null)
             {
+                if (Input.GetKeyDown(keyToPress))
+                {
+                    DestroyThisObjectServerRpc();
+                    //currentPlayer.GetComponent<PlayerInventory>().AddItem( gameObject );
+           
 
-                DestroyThisObjectServerRpc();
-             
+                }
             }
+          
         }
     }
 
 
+    public static void DestroyItem()
+    {
+
+    }
+
     [ServerRpc(RequireOwnership =false)]
     private void DestroyThisObjectServerRpc()
     {
-        DestroyThisObjectClientRpc();
+        gameObject.GetComponent<NetworkObject>().Despawn(true);
+        Destroy(gameObject);
+       
     }
 
-
-
-    [ClientRpc]
-    private void DestroyThisObjectClientRpc()
+    public void DestroySelf()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     private void OnTriggerStay(Collider other)
