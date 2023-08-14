@@ -7,10 +7,11 @@ using TMPro;
 using System.Text;
 using UnityEngine.Networking;
 using Unity.Netcode;
+using HathoraGameJam.CubicleEscape;
 
 public class MenuManager : NetworkBehaviour
 {
-    [SerializeField] List<GameObject> characterList;
+    //[SerializeField] List<GameObject> characterList;
     [SerializeField] GameObject startWorkButton;
     [SerializeField] GameObject signatureText;
     [SerializeField] GameObject firstPanel;
@@ -22,7 +23,9 @@ public class MenuManager : NetworkBehaviour
 
 
     public string namePlayer;
-    public GameObject characterSelected;
+    public SelectCharacter selectCharacterScript;
+    public int selectedCharacterIndex = 0;
+    //public GameObject characterSelected;
 
 
     private void Start()
@@ -42,9 +45,9 @@ public class MenuManager : NetworkBehaviour
 
     public void StartWork()
     {
-        namePlayer = signatureText.GetComponent<TextMeshProUGUI>().text;
 
-        foreach (GameObject character in characterList)
+        //Commented this out to go with just getting the index from the 'SelectCharacter' script
+        /*foreach (GameObject character in characterList)
         {
             if (character.activeSelf)
             {
@@ -55,9 +58,10 @@ public class MenuManager : NetworkBehaviour
         if (characterSelected == null)
         {
             Debug.LogError("No character selected!");
-        }
+        }*/
 
-        namePlayer = signatureText.GetComponent<TextMeshProUGUI>().text;
+        namePlayer = signatureText.GetComponent<TMP_InputField>().text;
+        selectedCharacterIndex = selectCharacterScript.indexCharacter;
 
         if (namePlayer == "")
         {
@@ -123,10 +127,12 @@ public class MenuManager : NetworkBehaviour
 
     private void CreateLobbyRoom(string namePlayer)
     {
-      //  Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
-        LobbyRoom.GetComponent<LobbyRoom>().SetNameAndSize(namePlayer);
+        //  Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
+        GameObject roomEntry = GameObject.Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
+        string capitalizedString = char.ToUpper(namePlayer[0]) + namePlayer.Substring(1);
+        roomEntry.GetComponent<RoomEntryPrefabLogic>().roomName.text = capitalizedString + " 's Office";
         thirdPanel.SetActive(true);
-        thirdPanel.GetComponent<RoomPollingNetwork>().SetOfficeName(namePlayer + "'Office");
+        thirdPanel.GetComponent<RoomPollingNetwork>().SetOfficeName(capitalizedString + " 's Office");
 
     // StartCoroutine(   CreateHathoraRoom());
  //-   StartCoroutine(   CreateHathoraLobby());
