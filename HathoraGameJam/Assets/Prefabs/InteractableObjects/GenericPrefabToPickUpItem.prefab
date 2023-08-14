@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 8289139099826331885}
   - component: {fileID: -3411827489369762060}
   m_Layer: 0
-  m_Name: PickUpItem
+  m_Name: GenericPrefabToPickUpItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tooltipMessage: {fileID: 1653882656311546995}
-  pickupbar: {fileID: 1247269290879871395}
+  pickupui: {fileID: 1247269290879871395}
   itemName: ConfettiGun
   keyToPress: 101
 --- !u!114 &-3411827489369762060

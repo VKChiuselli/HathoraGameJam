@@ -13,6 +13,7 @@ namespace HathoraGameJam.CubicleEscape
         public float moveForce = 1f;
 
         private Vector3 moveVector = new Vector3(0, 0, 0);
+        public bool hasBonusSpeed;
 
         private void Awake()
         {
@@ -26,15 +27,29 @@ namespace HathoraGameJam.CubicleEscape
         {
             if (IsClient && IsOwner)
             {
-                if (moveAction.action.IsInProgress())
+                if (!hasBonusSpeed)
                 {
-                    moveVector.x = moveAction.action.ReadValue<Vector2>().x;
-                    moveVector.z = moveAction.action.ReadValue<Vector2>().y;
-                    rb.AddForce(moveVector * moveForce * Time.deltaTime);
+                    if (moveAction.action.IsInProgress())
+                    {
+                        moveVector.x = moveAction.action.ReadValue<Vector2>().x;
+                        moveVector.z = moveAction.action.ReadValue<Vector2>().y;
+                        rb.AddForce(moveVector * moveForce * Time.deltaTime);
 
+                    }
                 }
+                else
+                {
+                    if (moveAction.action.IsInProgress())
+                    {
+                        moveVector.x = moveAction.action.ReadValue<Vector2>().x;
+                        moveVector.z = moveAction.action.ReadValue<Vector2>().y;
+                        rb.AddForce(moveVector *  2f * moveForce * Time.deltaTime);
+
+                    }
+                }
+           
             }
-         
+
         }
     }
 }

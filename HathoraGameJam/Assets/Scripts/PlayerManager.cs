@@ -1,20 +1,22 @@
+using HathoraGameJam.CubicleEscape;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerManager : MonoBehaviour
 {
- 
+    [SerializeField] TextMeshProUGUI BonusActiveText;
 
     public void HandlePowerUp(string itemName)
     {
 
         switch (itemName)
         {
-         
+
             case "SpeedBoost":
-                Speed();
+                StartCoroutine(Speed());
                 break;
             case "Invisibilty":
                 Speed();
@@ -33,12 +35,20 @@ public class PlayerManager : MonoBehaviour
                 break;
 
         }
-
-      
-
-      void Speed()
-    {
-            Debug.Log("Implement buff speed");
     }
-}
-}
+
+
+
+
+        public float speedDuration=5f;
+
+     IEnumerator Speed()
+    {
+        BonusActiveText.gameObject.SetActive(true);
+        BonusActiveText.text = "Speed boost activated!!!";
+            GetComponent<RollingChairMovement>().hasBonusSpeed=true;
+            yield return new WaitForSeconds(speedDuration);
+        GetComponent<RollingChairMovement>().hasBonusSpeed = false;
+        BonusActiveText.gameObject.SetActive(false);
+    }
+} 
