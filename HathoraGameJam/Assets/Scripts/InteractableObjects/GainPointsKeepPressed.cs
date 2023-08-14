@@ -18,8 +18,11 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
   public  Material enabledItemMaterial;
   public  Material disableItemMaterial;
 
+    public ulong currentPlayerId;
+
     private void Start()
     {
+        currentPlayerId = NetworkManager.LocalClient.ClientId;
         progressBarUI.GetComponent<ProgressBarUI>().tooltipText.text = "Hold Q";
         isExhausted.Value = false;
         if (howMuchPointGiveThisObject == 0)
@@ -35,8 +38,9 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 
         if (!oneTime)
         {
-            if (other.tag == "Player")
+            if (other.tag == "Player" &&  other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
             {
+            //    PppoServerRpc();
                 if (!isExhausted.Value)
                 {
                     SetProgressBarUI(holdStartTime, true);
@@ -69,12 +73,24 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 
 
     }
+    [ServerRpc (RequireOwnership =false)]
+    private void PppoServerRpc(ServerRpcParams serverRpcParams = default)
+    {
+        pppClientRpc(serverRpcParams.Receive.SenderClientId);
+    }
 
-
+    [ClientRpc]
+    private void pppClientRpc(ulong clientId)
+    {
+        if (NetworkManager.LocalClient.ClientId == clientId)
+        {
+            Debug.Log("pppClientRpc");
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             progressBarUI.SetActive(true);
         }
@@ -82,7 +98,7 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             progressBarUI.GetComponent<ProgressBarUI>().slider.value = 0;
             progressBarUI.SetActive(false);

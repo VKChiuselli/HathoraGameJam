@@ -373,6 +373,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7701030792453125511, guid: 8e81d8daeb3034f469f99b989fd1b6e3, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 9100133060252012608, guid: 8e81d8daeb3034f469f99b989fd1b6e3, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -676,6 +680,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 117842085164105855, guid: 9d5d1e2063d01634bad06a40efe79c98, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1528704589309879736, guid: 9d5d1e2063d01634bad06a40efe79c98, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4159,6 +4167,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4836865076513378, guid: 51bf789fc9fa2e44499d7c3d307e53f5, type: 3}
   m_PrefabInstance: {fileID: 278465646}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &281798976
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8342823490592527739, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342823490592527739, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342823490592527739, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.262
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342823490592527739, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342823490592527739, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342823490592527739, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342823490592527739, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342823490592527739, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342823490592527739, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342823490592527739, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8342823490592527739, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8346618961815544687, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
+      propertyPath: m_Name
+      value: PickUpItem
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 834cc40ff2c63ff44b54058b3c991018, type: 3}
 --- !u!1001 &293926186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8485,6 +8554,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 117842085164105855, guid: 9d5d1e2063d01634bad06a40efe79c98, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 1528704589309879736, guid: 9d5d1e2063d01634bad06a40efe79c98, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
