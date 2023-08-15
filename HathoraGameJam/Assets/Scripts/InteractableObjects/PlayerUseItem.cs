@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerUseItem : NetworkBehaviour
 {
     [SerializeField] GameObject confettiCannonProjectile;
+    [SerializeField] GameObject stickyNoteProjectile;
     PlayerInventory playerInventory;
  
     bool canAttack;
@@ -65,7 +66,7 @@ public class PlayerUseItem : NetworkBehaviour
                 Attack();
                 break;
             case "StickyNote":
-                Attack();
+                StickyNoteAttack();
                 break;
             case "DeskDrawerBarricade":
                 Attack();
@@ -80,6 +81,11 @@ public class PlayerUseItem : NetworkBehaviour
         }
     }
 
+    private void StickyNoteAttack()
+    {
+        StickyNoteAttackServerRpc(transform.position, transform.rotation);
+    }
+
     public float confettiCannonProjectileShootForce = 10.0f;
     private void ConfettiAttack()
     {
@@ -88,16 +94,24 @@ public class PlayerUseItem : NetworkBehaviour
     }
 
 
-    Transform confettiProjectile;
+    Transform  Projectile;
 
     [ServerRpc(RequireOwnership = false)]
     private void ConfettiAttackServerRpc(Vector3 position, Quaternion rotation, ServerRpcParams serverRpcParams = default)
     {
-        confettiProjectile = Instantiate(confettiCannonProjectile.transform, position, rotation);//, position, rotation);
-        NetworkObject confettiProjectileNetworkObject = confettiProjectile.GetComponent<NetworkObject>();
+        Projectile = Instantiate(confettiCannonProjectile.transform, position, rotation); 
+        NetworkObject confettiProjectileNetworkObject = Projectile.GetComponent<NetworkObject>();
         confettiProjectileNetworkObject.Spawn();
         confettiProjectileNetworkObject.GetComponent<CollisionConfettiAttackEffect>().ClientId = serverRpcParams.Receive.SenderClientId;
         ConfettiAttackClientRpc(confettiProjectileNetworkObject, serverRpcParams.Receive.SenderClientId);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void StickyNoteAttackServerRpc(Vector3 position, Quaternion rotation  )
+    {
+        Projectile = Instantiate(stickyNoteProjectile.transform, new Vector3(position.x, 0f, position.z) , stickyNoteProjectile.transform.rotation); 
+        NetworkObject stickyNoteNetworkObject = Projectile.GetComponent<NetworkObject>();
+        stickyNoteNetworkObject.Spawn();
     }
 
     private static NetworkObject GetCurrenPlayer()

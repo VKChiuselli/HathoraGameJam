@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Unity.Netcode;
+using static HathoraGameJam.CubicleEscape.RollingChairMovement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class PlayerManager : MonoBehaviour
         {
 
             case "SpeedBoost":
-                StartCoroutine(Speed());
+                SpeedBonus();
                 break;
             case "Invisibilty":
                 Speed();
@@ -39,9 +40,11 @@ public class PlayerManager : MonoBehaviour
 
         }
     }
- 
 
-
+    private void SpeedBonus()
+    {
+        StartCoroutine(Speed());
+    }
 
     public float speedDuration=5f;
     public bool blackScreen;
@@ -66,9 +69,9 @@ public class PlayerManager : MonoBehaviour
     {
         BonusActiveText.gameObject.SetActive(true);
         BonusActiveText.text = "Speed boost activated!!!";
-            GetComponent<RollingChairMovement>().hasBonusSpeed=true;
+            GetComponent<RollingChairMovement>().moveState  = MoveState.DoubleSpeed;
             yield return new WaitForSeconds(speedDuration);
-        GetComponent<RollingChairMovement>().hasBonusSpeed = false;
+        GetComponent<RollingChairMovement>().moveState = MoveState.Normal;
         BonusActiveText.gameObject.SetActive(false);
     }
 } 
