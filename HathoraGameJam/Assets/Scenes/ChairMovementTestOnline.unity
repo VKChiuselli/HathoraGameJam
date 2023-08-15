@@ -15313,6 +15313,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConfettiCannon
       objectReference: {fileID: 0}
+    - target: {fileID: 8603981842170263040, guid: df9dbda1cb41cfe4cab2a19dc1bd92a3, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19446,7 +19450,7 @@ PrefabInstance:
     - target: {fileID: 7949219437834198676, guid: c883364b6886c4941baa3766230f10bb, type: 3}
       propertyPath: NetworkConfig.PlayerPrefab
       value: 
-      objectReference: {fileID: 5078805654434246894, guid: 143d1460f29f04b46ad4c6ec42d93773, type: 3}
+      objectReference: {fileID: 3918515496725842508, guid: 143d1460f29f04b46ad4c6ec42d93773, type: 3}
     - target: {fileID: 7949219437834198676, guid: c883364b6886c4941baa3766230f10bb, type: 3}
       propertyPath: NetworkConfig.Prefabs.NetworkPrefabsLists.Array.size
       value: 1

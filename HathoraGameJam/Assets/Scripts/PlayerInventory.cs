@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerInventory : NetworkBehaviour
 {
@@ -28,9 +29,31 @@ public class PlayerInventory : NetworkBehaviour
     public void AddItem(string itemPassed)
     {
         WeaponHoldedImage.SetActive(true);
-        WeaponNameText.GetComponent<TextMeshProUGUI>().text = itemName;
         isHoldingItem = true;
         itemName = itemPassed;
+        Sprite loadedSprite =   Resources.Load<Sprite>($"Illustration/Weapons/{itemPassed}");
+
+        if (loadedSprite != null)
+        {
+        
+
+            if (WeaponHoldedImage.GetComponent<Image>() != null)
+            {
+                // Assign the loaded sprite to the Image component
+                WeaponHoldedImage.GetComponent<Image>().sprite = loadedSprite;
+            }
+            else
+            {
+                Debug.LogError("Image component not found on the GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Image not found in Resources folder.");
+        }
+
+        WeaponNameText.GetComponent<TextMeshProUGUI>().text = itemName;
+        WeaponNameText.GetComponent<TextMeshProUGUI>().text = itemName;
     }
 
     public void RemoveItem(string itemPassed)

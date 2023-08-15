@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 4731062350985255996}
   m_Layer: 0
   m_Name: ConfettiCannon
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
