@@ -4,10 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.Netcode;
 
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI BonusActiveText;
+   // [SerializeField] GameObject PlayerCanvasHUD;
+    [SerializeField] GameObject ConfettiBlackScreen;
 
     public void HandlePowerUp(string itemName)
     {
@@ -36,13 +39,30 @@ public class PlayerManager : MonoBehaviour
 
         }
     }
+ 
 
 
 
+    public float speedDuration=5f;
+    public bool blackScreen;
 
-        public float speedDuration=5f;
+   
 
-     IEnumerator Speed()
+    float blackScreenResetTimer=3f;
+
+    public void SetBlackScreen()
+    {
+        StartCoroutine(ResetAfterTime());
+    }
+
+   IEnumerator ResetAfterTime()
+    {
+        ConfettiBlackScreen.SetActive(true);
+        yield return new WaitForSeconds(blackScreenResetTimer);
+        ConfettiBlackScreen.SetActive(false);
+    }
+
+    IEnumerator Speed()
     {
         BonusActiveText.gameObject.SetActive(true);
         BonusActiveText.text = "Speed boost activated!!!";
