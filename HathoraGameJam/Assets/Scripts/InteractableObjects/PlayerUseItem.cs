@@ -44,7 +44,7 @@ public class PlayerUseItem : NetworkBehaviour
                 Debug.Log("Perform Attack");
 
                 PerformAttack(playerInventory.itemName);
-
+                playerInventory.RemoveItem(playerInventory.itemName);
             }
         }
 
