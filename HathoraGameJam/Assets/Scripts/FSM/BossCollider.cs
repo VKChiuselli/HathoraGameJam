@@ -9,19 +9,16 @@ using UnityEngine.AI;
 public class BossCollider : NetworkBehaviour
 {
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider playerCaught)
     {
-        if (!IsServer)
-        {
-            return;
-        }
-
-        if (collider.gameObject.tag == "Player")
+        if (playerCaught.gameObject.tag == "Player")
         {
             //TODO if boss collide with a player
             //player lose points
-      
-            BossCaughtPlayerServerRpc(collider.gameObject.GetComponent<PlayerManager>().ClientId.Value);
+            StartCoroutine(StopBoss());
+
+            BossCaughtPlayerServerRpc(playerCaught.gameObject.GetComponent<PlayerManager>().ClientId.Value);
+            StartCoroutine(StopPlayer(playerCaught.gameObject));
 
         }
     }
@@ -35,19 +32,17 @@ public class BossCollider : NetworkBehaviour
         BossCaughtPlayerClientRpc(clientId);
     }
 
-    public int  howMuchPointLosePlayer = -40;
+    public int howMuchPointLosePlayer = -40;
 
     [ClientRpc]
     private void BossCaughtPlayerClientRpc(ulong clientId)
     {
 
-        StartCoroutine(StopBoss());
 
-        if(GetCurrentClientId() == clientId)
+        if (GetCurrentClientId() == clientId)
         {
             NetworkObject playerCaught = GetCurrentPlayer();
 
-            StartCoroutine(StopPlayer(playerCaught.gameObject));
             playerCaught.gameObject.GetComponent<PlayerGainPoints>().GainPoints(howMuchPointLosePlayer);
         }
     }
