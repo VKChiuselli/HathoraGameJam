@@ -15,6 +15,7 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
     NetworkVariable< float> holdStartTimeNetwork = new NetworkVariable<float>();
     float holdStartTime;
     [SerializeField] GameObject progressBarUI;
+    [SerializeField] GameObject vfx;
   public  Material enabledItemMaterial;
   public  Material disableItemMaterial;
 
@@ -220,10 +221,12 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
         if (setVariable)
         {
             this.gameObject.GetComponent<MeshRenderer>().material = disableItemMaterial;
+            vfx.GetComponent<ParticleSystem>().Stop();
         }
         else
         {
             this.gameObject.GetComponent<MeshRenderer>().material = enabledItemMaterial;
+            vfx.GetComponent<ParticleSystem>().Play();
         }
     }
 }

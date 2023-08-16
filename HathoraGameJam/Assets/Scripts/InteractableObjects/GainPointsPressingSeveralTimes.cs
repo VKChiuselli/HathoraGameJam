@@ -14,6 +14,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
     public Material enabledItemMaterial;
     public Material disableItemMaterial;
     [SerializeField] GameObject progressBarUI;
+    [SerializeField] GameObject vfx;
      GameObject currentPlayerInteractable;
 
     private float timer = 0f;
@@ -153,10 +154,12 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
         if (setVariable)
         {
             this.gameObject.GetComponent<MeshRenderer>().material = disableItemMaterial;
+            vfx.GetComponent<ParticleSystem>().Stop();
         }
         else
         {
             this.gameObject.GetComponent<MeshRenderer>().material = enabledItemMaterial;
+            vfx.GetComponent<ParticleSystem>().Play();
         }
     }
 }
