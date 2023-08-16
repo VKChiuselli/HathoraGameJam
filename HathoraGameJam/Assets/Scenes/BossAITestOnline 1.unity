@@ -2347,6 +2347,22 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 892370527
       objectReference: {fileID: 0}
+    - target: {fileID: 780375552793767381, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780375552793767381, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780375552793767381, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780375552793767381, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 790352203584707181, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
       propertyPath: m_LocalPosition.x
       value: 306.75
@@ -2456,25 +2472,41 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7199086420643808751, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199086420643808751, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7199086420643808751, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -823
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7199086420643808751, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 380
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8157071421560516185, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8157071421560516185, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8157071421560516185, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -821
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8157071421560516185, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 443
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 790352203584707181, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 4342948661111793543, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
       insertIndex: -1
       addedObject: {fileID: 547440297}
     m_AddedComponents: []
@@ -2490,9 +2522,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 272e8c6a5c1f12b409a86719f01fca69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &183656396 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 790352203584707181, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
+--- !u!224 &183656396 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4342948661111793543, guid: a4a1ac5e9693d1e47a99b270202fac58, type: 3}
   m_PrefabInstance: {fileID: 183656394}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &198278312
@@ -21266,7 +21298,7 @@ PrefabInstance:
     - target: {fileID: 7949219437834198676, guid: c883364b6886c4941baa3766230f10bb, type: 3}
       propertyPath: NetworkConfig.PlayerPrefab
       value: 
-      objectReference: {fileID: 5384282797443370897, guid: 392bcb442cab1a44aaee000680f3a8ef, type: 3}
+      objectReference: {fileID: 3477763423174756757, guid: 143d1460f29f04b46ad4c6ec42d93773, type: 3}
     - target: {fileID: 7949219437834198676, guid: c883364b6886c4941baa3766230f10bb, type: 3}
       propertyPath: NetworkConfig.Prefabs.NetworkPrefabsLists.Array.size
       value: 1
