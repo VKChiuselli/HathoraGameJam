@@ -1,4 +1,5 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -8,6 +9,7 @@ public class PlayerSpawnPoints : NetworkBehaviour
 {
 
     public List<Vector3> listSpawnposition;
+     GameObject PlayerSpawnPoint;
     GameObject SpawnPointContainer;
     GameObject TargetGroup;
     public override void OnNetworkSpawn()
@@ -28,13 +30,32 @@ public class PlayerSpawnPoints : NetworkBehaviour
             //    listSpawnposition.Add(spawnPoint.position);
             //}
 
+            PlayerSpawnPoint = GameObject.Find("PlayerSpawnPoint");
+
+            if (PlayerSpawnPoint == null)
+            {
+                Debug.LogError("PlayerSpawnPoint is null");
+            }
+
+              listSpawnposition = LoadSpawnPoint();
+
             transform.position = listSpawnposition[(int)OwnerClientId];
         }
       
 
     }
 
+    private List<Vector3> LoadSpawnPoint()
+    {
+
+        List<Vector3> list = new List<Vector3>();
 
 
+        foreach (Transform t in PlayerSpawnPoint.transform)
+        {
+            list.Add(t.position);
+        }
 
+      return list;
+    }
 }

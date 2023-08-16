@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5592694391205392781}
   - component: {fileID: 8525445739062195031}
   m_Layer: 0
-  m_Name: Donut_Box_GainPoints_PressSeveralTimeButton
+  m_Name: Phone_Box_GainPoints_PressSeveralTimeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877019850480504}
-  m_Mesh: {fileID: 4300000, guid: 54cda2af79e08074fa9470e3153d682b, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 966c18623a5a2f344931cc56cfd05663, type: 3}
 --- !u!23 &23424133840695238
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -128,9 +128,9 @@ MonoBehaviour:
   disableItemMaterial: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
   progressBarUI: {fileID: 6369802585438564907}
   vfx: {fileID: 2607376898245282978}
-  resetTime: 2
+  resetTime: 10
   keyPressCount: 0
-  targetKeyPresses: 2
+  targetKeyPresses: 10
   keyToPress: 114
 --- !u!114 &5592694391205392781
 MonoBehaviour:
@@ -171,8 +171,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.96336997, y: 1.0559256, z: 1.680321}
-  m_Center: {x: 0.2189722, y: 0.5279628, z: 0.6298331}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1224667399794717367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,7 +275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8779480735034874409, guid: ec7deaa2011ed004092f65a9c949ac82, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.76
+      value: 0.419
       objectReference: {fileID: 0}
     - target: {fileID: 8779480735034874409, guid: ec7deaa2011ed004092f65a9c949ac82, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -326,7 +326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4330353087650538, guid: ad1aa46afd04a6942bb772aa5c443642, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.35
+      value: 0.458
       objectReference: {fileID: 0}
     - target: {fileID: 4330353087650538, guid: ad1aa46afd04a6942bb772aa5c443642, type: 3}
       propertyPath: m_LocalPosition.z

@@ -132,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveAction: {fileID: -4451418383949132651, guid: 936804c9a28e8be45a168ebcf70ba65b, type: 3}
   moveForce: 25600
-  hasBonusSpeed: 0
+  moveState: 0
 --- !u!54 &303304473743998815
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -173,10 +173,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listSpawnposition:
-  - {x: 2, y: 0, z: 2}
+  - {x: -12, y: 0, z: -27}
   - {x: 4, y: 0, z: 0}
   - {x: 6, y: 0.5, z: 0}
   - {x: 8, y: 0.5, z: 0}
+  - {x: 10, y: 0.5, z: 0}
   - {x: 10, y: 0.5, z: 0}
 --- !u!114 &7925674742300685912
 MonoBehaviour:
@@ -296,6 +297,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BonusActiveText: {fileID: 432666165781034780}
   ConfettiBlackScreen: {fileID: 8897739076668531928}
+  ClientId:
+    m_InternalValue: 0
   speedDuration: 5
   blackScreen: 0
 --- !u!114 &515809892165546864
