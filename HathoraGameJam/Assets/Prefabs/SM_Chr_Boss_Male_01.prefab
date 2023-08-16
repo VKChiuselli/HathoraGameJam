@@ -2751,6 +2751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100b15c5e6972cd43bdcbd909bceeb55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  howMuchPointLosePlayer: -40
 --- !u!1 &4999277138575288168
 GameObject:
   m_ObjectHideFlags: 0
@@ -3426,6 +3427,7 @@ GameObject:
   - component: {fileID: 7614263680154544529}
   - component: {fileID: 1597022170668077307}
   - component: {fileID: 749363859213406516}
+  - component: {fileID: 1958378082146961935}
   m_Layer: 0
   m_Name: SM_Chr_Boss_Male_01
   m_TagString: Untagged
@@ -3467,7 +3469,7 @@ Transform:
   - {fileID: 576588253511713892}
   - {fileID: 3819908131886414794}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6930161921370946164
 Animator:
@@ -3595,7 +3597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
+  AlwaysReplicateAsRoot: 1
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
@@ -3632,6 +3634,19 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &1958378082146961935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026288592071506903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac7f779e47df4d4b81c368aa9f114ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6930161921370946164}
 --- !u!1 &6193947377369067468
 GameObject:
   m_ObjectHideFlags: 0
