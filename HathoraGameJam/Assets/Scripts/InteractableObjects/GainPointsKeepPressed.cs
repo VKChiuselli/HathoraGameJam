@@ -8,7 +8,7 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 {
     private bool qKeyHeld = false;
  
-    private float holdDurationRequired = 1.0f;  
+    public float holdDurationRequired = 1.0f;  
     ScoreboardManager scoreBoard;
     public int howMuchPointGiveThisObject;
     NetworkVariable< bool> isExhausted = new NetworkVariable<bool>();
