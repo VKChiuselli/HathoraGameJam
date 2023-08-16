@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class TimerUI : NetworkBehaviour
 {
-    [SerializeField]
-    private TextMeshProUGUI timerText;
+    [SerializeField]    private TextMeshProUGUI timerText;
+    [SerializeField]    private GameObject ScoreBoardManagerCanvas;
 
-    private float gameTime = 3 * 60;
-    private NetworkVariable<int> timeRemaining = new NetworkVariable<int>(3 * 60);
+    private float gameTime = 3 * 10;
+    private NetworkVariable<int> timeRemaining = new NetworkVariable<int>(3 * 10);
 
 
     public override void OnNetworkSpawn()
@@ -33,19 +33,31 @@ public class TimerUI : NetworkBehaviour
     {
         if (IsServer)
         {
+
+            if (timeRemaining.Value == 0)
+            {
+                ScoreBoardManagerCanvas.GetComponent<ScoreboardManager>().ShowFinalScore();
+                return;
+            }
+
             gameTime -= Time.deltaTime;
             var intTime = (int)gameTime;
+
             if (timeRemaining.Value != intTime)
             {
                 timeRemaining.Value = intTime;
             }
+
         }
 
-        if (IsClient)
+        if (IsClient  )
         {
             ShowTimerOnText(timeRemaining.Value);
+       
         }
 
 
     }
+
+ 
 }
