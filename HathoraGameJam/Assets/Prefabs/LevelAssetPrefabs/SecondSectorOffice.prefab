@@ -405,7 +405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7543167955970730847}
   m_Layer: 0
-  m_Name: StealthOffice
+  m_Name: SecondSectorOffice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

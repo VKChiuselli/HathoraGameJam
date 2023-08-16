@@ -80,7 +80,11 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
     {
         if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
-            progressBarUI.SetActive(true);
+            if (this.gameObject.GetComponent<MeshRenderer>().material == disableItemMaterial)
+            {
+                return;
+            }
+                progressBarUI.SetActive(true);
         }
     }
 

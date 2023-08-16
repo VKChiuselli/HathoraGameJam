@@ -109,8 +109,16 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
 
     private void OnTriggerEnter(Collider other)
     {
+        if (this.gameObject.GetComponent<MeshRenderer>().material == disableItemMaterial)
+        {
+            return;
+        }
         if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
+            if (this.gameObject.GetComponent<MeshRenderer>().material == disableItemMaterial)
+            {
+                return;
+            }
             playerCanPressKey = true;
             progressBarUI.SetActive(true);
         }
