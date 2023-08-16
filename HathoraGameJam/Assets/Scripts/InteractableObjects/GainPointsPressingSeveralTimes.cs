@@ -115,10 +115,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
         }
         if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
-            if (this.gameObject.GetComponent<MeshRenderer>().material == disableItemMaterial)
-            {
-                return;
-            }
+          
             playerCanPressKey = true;
             progressBarUI.SetActive(true);
         }
@@ -159,6 +156,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
     [ClientRpc]
     private void SetObjectStateClientRpc(bool setVariable)
     {
+        gameObject.GetComponent<BoxCollider>().enabled = false;
         if (setVariable)
         {
             this.gameObject.GetComponent<MeshRenderer>().material = disableItemMaterial;

@@ -7,7 +7,6 @@ public class ProgressBarUI : MonoBehaviour
 {
 
 
-    [SerializeField] private GameObject hasProgressGameObject;
     [SerializeField] public Image barImage;
     [SerializeField] public  Slider slider;
     [SerializeField] public  TextMeshProUGUI tooltipText;
@@ -18,16 +17,9 @@ public class ProgressBarUI : MonoBehaviour
 
     private void Start()
     {
-        hasProgress = hasProgressGameObject.GetComponent<IHasProgress>();
-        if (hasProgress == null)
-        {
-            Debug.LogError("Game Object " + hasProgressGameObject + " does not have a component that implements IHasProgress!");
-        }
+   
 
-        hasProgress.OnProgressChanged += HasProgress_OnProgressChanged;
-
-        barImage.fillAmount = 0f;
-
+ 
         Hide();
     }
 

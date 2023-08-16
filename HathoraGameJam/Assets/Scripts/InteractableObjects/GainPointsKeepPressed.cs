@@ -209,6 +209,7 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
     [ClientRpc]
     private void SetObjectStateClientRpc(bool setVariable)
     {
+        gameObject.GetComponent<BoxCollider>().enabled = false;
         if (setVariable)
         {
             this.gameObject.GetComponent<MeshRenderer>().material = disableItemMaterial;
