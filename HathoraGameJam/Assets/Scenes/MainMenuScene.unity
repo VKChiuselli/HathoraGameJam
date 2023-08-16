@@ -3018,6 +3018,35 @@ PrefabInstance:
       propertyPath: m_Name
       value: Create Room Button
       objectReference: {fileID: 0}
+    - target: {fileID: 1266896852483600863, guid: 8ab284b5214534699984acce51873626, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266896852483600863, guid: 8ab284b5214534699984acce51873626, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266896852483600863, guid: 8ab284b5214534699984acce51873626, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 969486924}
+    - target: {fileID: 1266896852483600863, guid: 8ab284b5214534699984acce51873626, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266896852483600863, guid: 8ab284b5214534699984acce51873626, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCreateLobbyBtnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266896852483600863, guid: 8ab284b5214534699984acce51873626, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hathora.Demos.Shared.Scripts.Client.ClientMgr.HathoraClientMgrDemoUi,
+        Hathora.Demos.Shared
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266896852483600863, guid: 8ab284b5214534699984acce51873626, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1266896853885494087, guid: 8ab284b5214534699984acce51873626, type: 3}
       propertyPath: m_text
       value: Create Room
@@ -22527,7 +22556,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7068926073721824238}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 969486924}
+        m_TargetAssemblyTypeName: Hathora.Demos.Shared.Scripts.Client.ClientMgr.HathoraClientMgrDemoUi,
+          Hathora.Demos.Shared
+        m_MethodName: OnAuthLoginBtnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7068926073729340596
 GameObject:
   m_ObjectHideFlags: 0
