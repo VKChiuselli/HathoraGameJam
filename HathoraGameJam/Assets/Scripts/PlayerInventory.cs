@@ -52,8 +52,7 @@ public class PlayerInventory : NetworkBehaviour
             Debug.LogError("Image not found in Resources folder.");
         }
 
-        WeaponNameText.GetComponent<TextMeshProUGUI>().text = itemName;
-        WeaponNameText.GetComponent<TextMeshProUGUI>().text = itemName;
+        WeaponNameText.GetComponent<TextMeshProUGUI>().text = itemName; 
     }
 
     public void RemoveItem(string itemPassed)

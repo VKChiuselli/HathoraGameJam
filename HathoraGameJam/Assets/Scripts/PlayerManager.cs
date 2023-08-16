@@ -7,11 +7,34 @@ using TMPro;
 using Unity.Netcode;
 using static HathoraGameJam.CubicleEscape.RollingChairMovement;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : NetworkBehaviour
 {
     [SerializeField] TextMeshProUGUI BonusActiveText;
-   // [SerializeField] GameObject PlayerCanvasHUD;
+    // [SerializeField] GameObject PlayerCanvasHUD;
     [SerializeField] GameObject ConfettiBlackScreen;
+    public NetworkVariable<ulong> ClientId = new NetworkVariable<ulong>();
+
+    public override void OnNetworkSpawn()
+    {
+        if (IsClient && IsOwner)
+        {
+            SetClientIdServerRpc();
+        }
+
+    }
+    [ServerRpc(RequireOwnership = false)]
+    private void SetClientIdServerRpc()
+    {
+        ClientId.Value = GetComponent<NetworkObject>().OwnerClientId;
+    }
+
+    private static NetworkObject GetCurrenPlayer()
+    {
+        GameObject networkManager = GameObject.Find("NetworkManager");
+        return networkManager.GetComponent<NetworkManager>().LocalClient.PlayerObject;
+    }
+
+
 
     public void HandlePowerUp(string itemName)
     {
@@ -46,19 +69,19 @@ public class PlayerManager : MonoBehaviour
         StartCoroutine(Speed());
     }
 
-    public float speedDuration=5f;
+    public float speedDuration = 5f;
     public bool blackScreen;
 
-   
 
-    float blackScreenResetTimer=3f;
+
+    float blackScreenResetTimer = 3f;
 
     public void SetBlackScreen()
     {
         StartCoroutine(ResetAfterTime());
     }
 
-   IEnumerator ResetAfterTime()
+    IEnumerator ResetAfterTime()
     {
         ConfettiBlackScreen.SetActive(true);
         yield return new WaitForSeconds(blackScreenResetTimer);
@@ -69,9 +92,9 @@ public class PlayerManager : MonoBehaviour
     {
         BonusActiveText.gameObject.SetActive(true);
         BonusActiveText.text = "Speed boost activated!!!";
-            GetComponent<RollingChairMovement>().moveState  = MoveState.DoubleSpeed;
-            yield return new WaitForSeconds(speedDuration);
+        GetComponent<RollingChairMovement>().moveState = MoveState.DoubleSpeed;
+        yield return new WaitForSeconds(speedDuration);
         GetComponent<RollingChairMovement>().moveState = MoveState.Normal;
         BonusActiveText.gameObject.SetActive(false);
     }
-} 
+}

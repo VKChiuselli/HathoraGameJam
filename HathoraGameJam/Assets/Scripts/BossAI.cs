@@ -22,7 +22,7 @@ public class BossAI : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         if (!IsServer) return;
-        GetComponent<NavMeshAgent>().SetDestination(waypoints[currentWaypoint].position);
+    //    GetComponent<NavMeshAgent>().SetDestination(waypoints[currentWaypoint].position);
     }
 
 

@@ -24,19 +24,18 @@ public class PlayerState : NetworkBehaviour
         }
 
     }
-
-    // Update is called once per frame
+     
     void Update()
     {
-        if (IsServer && !caught.Value)
-        {
-            scoreTick += Time.deltaTime;
-            if (scoreTick > 1)
-            {
+        //if (IsServer && !caught.Value)
+        //{
+        //    scoreTick += Time.deltaTime;
+        //    if (scoreTick > 1)
+        //    {
 
-                score.Value += 10;
-                scoreTick = 0;
-            }
-        }
+        //        score.Value += 10;
+        //        scoreTick = 0;
+        //    }
+        //}
     }
 }
