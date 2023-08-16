@@ -74,20 +74,7 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 
 
     }
-    [ServerRpc (RequireOwnership =false)]
-    private void PppoServerRpc(ServerRpcParams serverRpcParams = default)
-    {
-        pppClientRpc(serverRpcParams.Receive.SenderClientId);
-    }
-
-    [ClientRpc]
-    private void pppClientRpc(ulong clientId)
-    {
-        if (NetworkManager.LocalClient.ClientId == clientId)
-        {
-            Debug.Log("pppClientRpc");
-        }
-    }
+   
 
     private void OnTriggerEnter(Collider other)
     {

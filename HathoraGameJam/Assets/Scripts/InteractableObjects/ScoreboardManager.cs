@@ -10,8 +10,13 @@ public class ScoreboardManager : NetworkBehaviour
 
     private Dictionary<ulong, int> playerPointsDictionary;
     [SerializeField] TextMeshProUGUI ScoreBoardUIText;
+    [SerializeField] TextMeshProUGUI FinalScoreBoardText;
+    [SerializeField] GameObject FinalScorePanel;
+    [SerializeField] GameObject ScoreBoardPanel;
     
     public static ScoreboardManager Instance { get; private set; }
+
+ 
 
     private void Awake()
     {
@@ -20,13 +25,26 @@ public class ScoreboardManager : NetworkBehaviour
         playerPointsDictionary = new Dictionary<ulong, int>();
     }
 
-
-    //player call this function when score points with some action
+     
     public void SetPlayerPoints(int updatedAmount)
     {
         SetPlayerPointsServerRpc(updatedAmount);
     }
 
+    public void ShowFinalScore()
+    {
+        ShowFinalScoreClientRpc();
+
+    }
+
+    [ClientRpc]
+    private void ShowFinalScoreClientRpc()
+    {
+        FinalScorePanel.SetActive(true);
+        FinalScoreBoardText.text = ScoreBoardUIText.text;
+        ScoreBoardPanel.SetActive(false);
+        //TODO create a function that orders the highest score to the lowest
+    }
 
     [ServerRpc(RequireOwnership =false)]
     private void SetPlayerPointsServerRpc(int updatedAmount, ServerRpcParams serverRpcParams = default)

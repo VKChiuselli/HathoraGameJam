@@ -17,13 +17,17 @@ public class TimerUI : NetworkBehaviour
         {
             timeRemaining.OnValueChanged += (_, newValue) =>
             {
-                System.TimeSpan time = System.TimeSpan.FromSeconds(newValue);
-                timerText.text = time.ToString(@"mm\:ss");
+                ShowTimerOnText(newValue);
             };
         }
 
     }
 
+    private void ShowTimerOnText(int newValue)
+    {
+        System.TimeSpan time = System.TimeSpan.FromSeconds(newValue);
+        timerText.text = time.ToString(@"mm\:ss");
+    }
 
     void Update()
     {
@@ -36,5 +40,12 @@ public class TimerUI : NetworkBehaviour
                 timeRemaining.Value = intTime;
             }
         }
+
+        if (IsClient)
+        {
+            ShowTimerOnText(timeRemaining.Value);
+        }
+
+
     }
 }
