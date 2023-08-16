@@ -7,7 +7,7 @@ public class TimerUI : NetworkBehaviour
     [SerializeField]    private TextMeshProUGUI timerText;
     [SerializeField]    private GameObject ScoreBoardManagerCanvas;
 
-    private float gameTime = 3 * 10;
+    private float gameTime = 2 * 60;
     private NetworkVariable<int> timeRemaining = new NetworkVariable<int>(3 * 10);
 
 

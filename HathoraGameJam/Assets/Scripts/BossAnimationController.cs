@@ -6,17 +6,12 @@ using UnityEngine.AI;
 public class BossAnimationController : MonoBehaviour
 {
     [SerializeField] Animator animator;
-
-    void Update()
+ 
+  
+     
+ 
+    public void SetAnimator(bool animated)
     {
-        if (GetComponent<NavMeshAgent>().speed > 0)
-        {
-            animator.SetBool("Yelling", false);
-        }
-        else if (GetComponent<NavMeshAgent>().speed == 0)
-        {
-            animator.SetBool("Yelling", true);
-        }
-
+        animator.SetBool("Yelling", animated);
     }
 }

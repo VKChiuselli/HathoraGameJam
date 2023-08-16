@@ -1,3 +1,4 @@
+using FSM;
 using HathoraGameJam.CubicleEscape;
 using System;
 using System.Collections;
@@ -38,6 +39,7 @@ public class BossCollider : NetworkBehaviour
     private void BossCaughtPlayerClientRpc(ulong clientId)
     {
 
+   
 
         if (GetCurrentClientId() == clientId)
         {
@@ -64,8 +66,12 @@ public class BossCollider : NetworkBehaviour
     float bossStopDuration = 7f;
     IEnumerator StopBoss()
     {
-        transform.parent.gameObject.GetComponent<NavMeshAgent>().speed = 0;
+        transform.parent.gameObject.GetComponent<NavMeshAgent>().speed =0f;
+        transform.parent.gameObject.GetComponent<BaseStateMachine>().enabled = false;
+        transform.parent.gameObject.GetComponent<BossAnimationController>().SetAnimator(true);
         yield return new WaitForSeconds(bossStopDuration);
+        transform.parent.gameObject.GetComponent<BossAnimationController>().SetAnimator(false);
+        transform.parent.gameObject.GetComponent<BaseStateMachine>().enabled = true;
         transform.parent.gameObject.GetComponent<NavMeshAgent>().speed = 3.5f;
     }
 
