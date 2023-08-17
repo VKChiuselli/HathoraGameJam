@@ -5,19 +5,24 @@ using UnityEngine.AI;
 
 public class PatrolPoints : MonoBehaviour
 {
-    [SerializeField]
-    private int currentPoint = -1;
-    [SerializeField] private List<Transform> points; //make this enumerator
+    [SerializeField]    private int currentPoint = -1;
+    [SerializeField] List<Transform> pointsWhereBossGo; //make this enumerator
     [SerializeField] public Transform deskPoint; //make this enumerator
 
 
+    private void Awake()
+    {
+    
+
+    }
+
     public Transform GetNext()
     {
-        if (++currentPoint >= points.Count)
+        if (++currentPoint >= pointsWhereBossGo.Count)
         {
             currentPoint = 0;
         }
-        return points[currentPoint];
+        return pointsWhereBossGo[currentPoint];
     }
 
     public bool HasReached(NavMeshAgent navMeshAgent)

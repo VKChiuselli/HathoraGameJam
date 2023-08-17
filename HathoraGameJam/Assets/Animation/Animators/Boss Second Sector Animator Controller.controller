@@ -40,7 +40,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: bbe078020ca31ae44a72e64f5468cb3b, type: 3}
+  m_Motion: {fileID: 7400000, guid: 1b4cd376195a74d43bc2759ea6bd5242, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -126,7 +126,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Boss Animator Controller
+  m_Name: Boss Second Sector Animator Controller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Yelling
