@@ -60,7 +60,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
 
         if (!oneTime)
         {
-            if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+            if ((other.tag == "Player" || other.tag == "Immortal") && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
             {
                 playerCanPressKey = true;
                 currentPlayerInteractable = other.gameObject;
@@ -113,7 +113,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
         {
             return;
         }
-        if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+        if ((other.tag == "Player" || other.tag == "Immortal") && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
           
             playerCanPressKey = true;
@@ -123,7 +123,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+        if ((other.tag == "Player" || other.tag == "Immortal") && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             progressBarUI.GetComponent<ProgressBarUI>().slider.value = 0;
             keyPressCount = 0;

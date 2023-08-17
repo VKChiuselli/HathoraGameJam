@@ -39,7 +39,7 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 
         if (!oneTime)
         {
-            if (other.tag == "Player" &&  other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+            if ((other.tag == "Player" || other.tag == "Immortal") &&  other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
             {
             //    PppoServerRpc();
                 if (!isExhausted.Value)
@@ -78,7 +78,7 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+        if ((other.tag == "Player" || other.tag == "Immortal") && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             if (this.gameObject.GetComponent<MeshRenderer>().material == disableItemMaterial)
             {
@@ -90,10 +90,14 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player" && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
+        if ((other.tag == "Player" || other.tag == "Immortal") && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
             progressBarUI.GetComponent<ProgressBarUI>().slider.value = 0;
             progressBarUI.SetActive(false);
+            if (GetComponent<AudioSource>().isPlaying)
+            {
+                GetComponent<AudioSource>().Stop();
+            }
         }
     }
 
@@ -131,15 +135,12 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
             {
 
                 timer += Time.deltaTime;
-
+                GetComponent<SFX>().PlayFirstEffectLoop();
                
-                    // Call your function here
-                    //      ResetObject();
+       
                 Debug.Log("  progressBarUI.GetComponent<ProgressBarUI>().barImage.fillAmount  " + progressBarUI.GetComponent<ProgressBarUI>().barImage.fillAmount);
                     progressBarUI.GetComponent<ProgressBarUI>().slider.value = timer / holdDurationRequired;
-
-                // Reset the timer
-         
+ 
                 }
 
         }
@@ -165,17 +166,10 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
     public override void OnNetworkSpawn()
     {
         isExhausted.OnValueChanged += isExhausted_OnValueChanged;
-     //   holdStartTimeNetwork.OnValueChanged += holdStartTimeNetwork_OnValueChanged;
+    
     }
 
-    //private void holdStartTimeNetwork_OnValueChanged(float previousValue, float newValue)
-    //{
-    //     
-    //    OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs
-    //    {
-    //        progressNormalized = holdStartTimeNetwork.Value / 1f
-    //    });
-    //}
+   
 
     private void isExhausted_OnValueChanged(bool previousValue, bool newValue)
     {
@@ -209,6 +203,10 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
     [ClientRpc]
     private void SetObjectStateClientRpc(bool setVariable)
     {
+        if (GetComponent<AudioSource>().isPlaying)
+        {
+        GetComponent<AudioSource>().Stop();
+        }
         gameObject.GetComponent<BoxCollider>().enabled = false;
         if (setVariable)
         {
