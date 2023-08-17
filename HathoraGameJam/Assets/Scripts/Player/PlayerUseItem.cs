@@ -90,6 +90,7 @@ public class PlayerUseItem : NetworkBehaviour
 
     private void InvisibilityAttack()
     {
+        GetComponent<SFX>().PlaySecondEffect();
         ChangePlayerTagServerRpc(gameObject);
     }
 

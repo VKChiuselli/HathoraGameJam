@@ -66,6 +66,7 @@ public class PlayerManager : NetworkBehaviour
 
     private void SpeedBonus()
     {
+        GetComponent<SFX>().PlayThirdEffect();
         StartCoroutine(Speed());
     }
 
