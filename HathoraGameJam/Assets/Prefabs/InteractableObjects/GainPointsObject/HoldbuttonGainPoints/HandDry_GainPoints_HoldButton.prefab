@@ -10067,7 +10067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0006aff52805d84a961a2ddc73a38bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstEffect: {fileID: 0}
+  firstEffect: {fileID: 8300000, guid: 3920b77d0077b54498bc8e2e6d5912b8, type: 3}
   secondEffect: {fileID: 0}
   thirdEffect: {fileID: 0}
   severalEffects: []

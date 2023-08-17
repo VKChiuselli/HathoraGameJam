@@ -21,6 +21,10 @@ public class SFX : MonoBehaviour
         {
             if (firstEffect != null)
             {
+                if (audioSource.isPlaying)
+                {
+                    return;
+                }
                 audioSource.PlayOneShot(firstEffect);
             }
         }
@@ -48,6 +52,10 @@ public class SFX : MonoBehaviour
         {
             if (secondEffect != null)
             {
+                if (audioSource.isPlaying)
+                {
+                    return;
+                }
                 audioSource.PlayOneShot(secondEffect);
             }
         }

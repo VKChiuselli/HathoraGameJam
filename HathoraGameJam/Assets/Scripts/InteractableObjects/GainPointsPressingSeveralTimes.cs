@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using System;
+using Random = UnityEngine.Random;
 
 public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
 {
- 
+
     ScoreboardManager scoreBoard;
     public int howMuchPointGiveThisObject;
     NetworkVariable<bool> isExhausted = new NetworkVariable<bool>();
@@ -15,7 +14,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
     public Material disableItemMaterial;
     [SerializeField] GameObject progressBarUI;
     [SerializeField] GameObject vfx;
-     GameObject currentPlayerInteractable;
+    GameObject currentPlayerInteractable;
 
     private float timer = 0f;
     private float interval = 10f; // 10 seconds interval
@@ -30,7 +29,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
 
     public override void OnNetworkSpawn()
     {
-        isExhausted.OnValueChanged += isExhausted_OnValueChanged; 
+        isExhausted.OnValueChanged += isExhausted_OnValueChanged;
     }
 
     private void isExhausted_OnValueChanged(bool previousValue, bool newValue)
@@ -82,7 +81,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
         }
     }
 
-    private void CounterKey( GameObject currentPlayer)
+    private void CounterKey(GameObject currentPlayer)
     {
         if (!isExhausted.Value)
         {
@@ -115,7 +114,7 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
         }
         if ((other.tag == "Player" || other.tag == "Immortal") && other.gameObject.GetComponent<NetworkObject>().IsLocalPlayer)
         {
-          
+
             playerCanPressKey = true;
             progressBarUI.SetActive(true);
         }
@@ -134,7 +133,28 @@ public class GainPointsPressingSeveralTimes : NetworkBehaviour, IHasProgress
 
     private void IncreaseProgressBar(int KeyPressCount)
     {
-        progressBarUI.GetComponent<ProgressBarUI>().slider.value =((float) KeyPressCount / targetKeyPresses);
+        progressBarUI.GetComponent<ProgressBarUI>().slider.value = ((float)KeyPressCount / targetKeyPresses);
+
+        HandleMusicSFX();
+    }
+
+    private void HandleMusicSFX()
+    {
+        if (GetComponent<SFX>().secondEffect == null)
+        {
+            GetComponent<SFX>().PlayFirstEffect();
+            return;
+        }
+
+        int randomMusic = Random.Range(0, 2);
+        if (randomMusic == 0)
+        {
+            GetComponent<SFX>().PlaySecondEffect();
+        }
+        else
+        {
+            GetComponent<SFX>().PlayFirstEffect();
+        }
     }
 
     public void IncreasePlayerPoints(GameObject player)
