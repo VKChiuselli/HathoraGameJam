@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
- 
+
 public class PlayerUseItem : NetworkBehaviour
 {
     [SerializeField] GameObject confettiCannonProjectile;
     [SerializeField] GameObject stickyNoteProjectile;
     PlayerInventory playerInventory;
- 
+
     bool canAttack;
     private KeyCode keyToPress = KeyCode.Space;
 
@@ -19,7 +19,7 @@ public class PlayerUseItem : NetworkBehaviour
         canAttack = false;
         playerInventory = GetComponent<PlayerInventory>();
     }
-     
+
     void Update()
     {
 
@@ -49,7 +49,14 @@ public class PlayerUseItem : NetworkBehaviour
             }
         }
 
-    
+        //if (Input.GetKeyDown(keyToPress))
+        //{
+
+        //    Debug.Log("Test  Attack");
+
+        //    InvisibilityAttack();
+        //}
+
 
 
     }
@@ -68,8 +75,8 @@ public class PlayerUseItem : NetworkBehaviour
             case "StickyNote":
                 StickyNoteAttack();
                 break;
-            case "DeskDrawerBarricade":
-                Attack();
+            case "Invisibility":
+                InvisibilityAttack();
                 break;
             case "ConfettiCannon":
                 ConfettiAttack();
@@ -81,6 +88,35 @@ public class PlayerUseItem : NetworkBehaviour
         }
     }
 
+    private void InvisibilityAttack()
+    {
+        ChangePlayerTagServerRpc(gameObject);
+    }
+
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ChangePlayerTagServerRpc(NetworkObjectReference playerUsedItem)
+    {
+        ChangePlayerTagClientRpc(playerUsedItem);
+    }
+
+
+    [ClientRpc]
+    private void ChangePlayerTagClientRpc(NetworkObjectReference playerUsedItem)
+    {
+        playerUsedItem.TryGet(out NetworkObject player);
+        StartCoroutine(SetTag(player.gameObject));
+    }
+
+    float inviDuration = 5f;
+    IEnumerator SetTag(GameObject player)
+    {
+        player.tag = "Immortal";
+        yield return new WaitForSeconds(inviDuration);
+        player.tag = "Player";
+
+    }
+
     private void StickyNoteAttack()
     {
         StickyNoteAttackServerRpc(transform.position, transform.rotation);
@@ -89,17 +125,17 @@ public class PlayerUseItem : NetworkBehaviour
     public float confettiCannonProjectileShootForce = 10.0f;
     private void ConfettiAttack()
     {
- 
+
         ConfettiAttackServerRpc(transform.position, transform.rotation);
     }
 
 
-    Transform  Projectile;
+    Transform Projectile;
 
     [ServerRpc(RequireOwnership = false)]
     private void ConfettiAttackServerRpc(Vector3 position, Quaternion rotation, ServerRpcParams serverRpcParams = default)
     {
-        Projectile = Instantiate(confettiCannonProjectile.transform, position, rotation); 
+        Projectile = Instantiate(confettiCannonProjectile.transform, position, rotation);
         NetworkObject confettiProjectileNetworkObject = Projectile.GetComponent<NetworkObject>();
         confettiProjectileNetworkObject.Spawn();
         confettiProjectileNetworkObject.GetComponent<CollisionConfettiAttackEffect>().ClientId = serverRpcParams.Receive.SenderClientId;
@@ -107,9 +143,9 @@ public class PlayerUseItem : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void StickyNoteAttackServerRpc(Vector3 position, Quaternion rotation  )
+    private void StickyNoteAttackServerRpc(Vector3 position, Quaternion rotation)
     {
-        Projectile = Instantiate(stickyNoteProjectile.transform, new Vector3(position.x, 0f, position.z) , stickyNoteProjectile.transform.rotation); 
+        Projectile = Instantiate(stickyNoteProjectile.transform, new Vector3(position.x, 0f, position.z), stickyNoteProjectile.transform.rotation);
         NetworkObject stickyNoteNetworkObject = Projectile.GetComponent<NetworkObject>();
         stickyNoteNetworkObject.Spawn();
     }
@@ -123,7 +159,7 @@ public class PlayerUseItem : NetworkBehaviour
     [ClientRpc]
     private void ConfettiAttackClientRpc(NetworkObjectReference CollisionConfettiAttackEffectGO, ulong clientId)//CollisionConfettiAttackEffectGO
     {
-        if(clientId== GetCurrenPlayer().OwnerClientId)
+        if (clientId == GetCurrenPlayer().OwnerClientId)
         {
             return;
         }
@@ -131,7 +167,7 @@ public class PlayerUseItem : NetworkBehaviour
 
         CollisionConfettiAttackEffectGO.TryGet(out NetworkObject CollisionConfettiAttackEffectGONetworkObject);
         CollisionConfettiAttackEffect collisionConfettiAttackEffect = CollisionConfettiAttackEffectGONetworkObject.GetComponent<CollisionConfettiAttackEffect>();
-        if (collisionConfettiAttackEffect==null)
+        if (collisionConfettiAttackEffect == null)
         {
             // Parent already spawned an object
             return;
