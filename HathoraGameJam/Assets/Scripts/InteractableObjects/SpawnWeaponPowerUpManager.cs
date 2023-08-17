@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class SpawnWeaponPowerUpManager : MonoBehaviour
+public class SpawnWeaponPowerUpManager : NetworkBehaviour
 {
     public List<Transform> spawnPoints = new List<Transform>();
     public List<GameObject> listOfObjectToSpawn;
@@ -16,16 +17,10 @@ public class SpawnWeaponPowerUpManager : MonoBehaviour
         }
         lastSpawnTime = Time.time;
 
-        SpawnObject();
-        SpawnObject();
-        SpawnObject();
-        SpawnObject();
-        SpawnObject();
-        SpawnObject();
     }
 
 
-    public float spawnDelay = 15f;
+    public float spawnDelay = 2f;
 
     private float lastSpawnTime;
 
@@ -34,6 +29,10 @@ public class SpawnWeaponPowerUpManager : MonoBehaviour
 
     private void Update()
     {
+        if (!IsServer)
+        {
+            return;
+        }
         if (Time.time - lastSpawnTime >= spawnDelay)
         {
             lastSpawnTime = Time.time;
@@ -41,7 +40,10 @@ public class SpawnWeaponPowerUpManager : MonoBehaviour
         }
     }
 
-    private void SpawnObject()
+    GameObject itemToSpawn;
+
+     
+    private void SpawnObject ()
     {
         if (spawnPoints.Count == 0)
         {
@@ -51,7 +53,11 @@ public class SpawnWeaponPowerUpManager : MonoBehaviour
         int randomItemIndex = Random.Range(0, listOfObjectToSpawn.Count);
         Transform spawnPoint = spawnPoints[randomIndex];
 
-        Instantiate(listOfObjectToSpawn[randomItemIndex], spawnPoint.position, spawnPoint.rotation);
+        itemToSpawn = Instantiate(listOfObjectToSpawn[randomItemIndex], spawnPoint.position, spawnPoint.rotation);
+
+        NetworkObject itemToSpawnNetworkObject = itemToSpawn.GetComponent<NetworkObject>();
+        itemToSpawnNetworkObject.Spawn();
+
         spawnPoints.Remove(spawnPoint);
 
     }
