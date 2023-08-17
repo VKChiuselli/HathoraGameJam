@@ -97,7 +97,10 @@ public class PlayerUseItem : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void ChangePlayerTagServerRpc(NetworkObjectReference playerUsedItem)
     {
+        playerUsedItem.TryGet(out NetworkObject player);
+        StartCoroutine(SetTag(player.gameObject));
         ChangePlayerTagClientRpc(playerUsedItem);
+
     }
 
 
