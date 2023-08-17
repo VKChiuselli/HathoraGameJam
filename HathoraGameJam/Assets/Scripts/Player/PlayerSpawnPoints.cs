@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using HathoraGameJam.CubicleEscape;
 
 public class PlayerSpawnPoints : NetworkBehaviour
 {
@@ -16,14 +17,17 @@ public class PlayerSpawnPoints : NetworkBehaviour
     {
         if (IsClient && IsOwner)
         {
-            TargetGroup = GameObject.Find("Target Group");
+            /*TargetGroup = GameObject.Find("Target Group");
             CinemachineTargetGroup cinemachineTargetGroup = TargetGroup.GetComponent<CinemachineTargetGroup>();
             CinemachineTargetGroup.Target target;
             target.target = this.transform;
             target.weight = 1;
             target.radius = 1;
 
-            cinemachineTargetGroup.m_Targets.SetValue(target, 0);
+            cinemachineTargetGroup.m_Targets.SetValue(target, 0);*/
+
+            TargetGroupManager.instance.AddToGroup(this.transform, 1, 1);
+
 
             //    foreach(Transform spawnPoint in SpawnPointContainer.transform)
             //{

@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ChairMovementTest.unity
     guid: 050326fc1d4529c47b07b56f14c32812
+  - enabled: 1
+    path: Assets/Scenes/GameFieldOfficial.unity
+    guid: fe9aecb9433970e43a0a00489c89e127
   m_configObjects: {}
