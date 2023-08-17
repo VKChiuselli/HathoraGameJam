@@ -3736,16 +3736,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPoint: 0
-  points:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  pointsWhereBossGo: []
   deskPoint: {fileID: 0}
+  bossWaypointsParent: {fileID: 0}
 --- !u!114 &5212325678150237167
 MonoBehaviour:
   m_ObjectHideFlags: 0
