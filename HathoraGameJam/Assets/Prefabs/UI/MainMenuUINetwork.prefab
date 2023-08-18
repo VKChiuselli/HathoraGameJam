@@ -498,8 +498,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4355197993534264380}
-        m_TargetAssemblyTypeName: JoinNetwork, Assembly-CSharp
+      - m_Target: {fileID: 529648861877455676}
+        m_TargetAssemblyTypeName: MainMenuUINetwork, Assembly-CSharp
         m_MethodName: StartLocalServer
         m_Mode: 1
         m_Arguments:
@@ -808,7 +808,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4355197993534264380}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: JoinNetwork, Assembly-CSharp
         m_MethodName: JoinButton
         m_Mode: 1
@@ -942,8 +942,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4355197993534264380}
-        m_TargetAssemblyTypeName: JoinNetwork, Assembly-CSharp
+      - m_Target: {fileID: 529648861877455676}
+        m_TargetAssemblyTypeName: MainMenuUINetwork, Assembly-CSharp
         m_MethodName: StartLocalHosting
         m_Mode: 1
         m_Arguments:
@@ -1345,8 +1345,8 @@ GameObject:
   - component: {fileID: 4032173480898406724}
   - component: {fileID: 588678998630309115}
   - component: {fileID: 3706993792211425820}
-  - component: {fileID: 4355197993534264380}
   - component: {fileID: -6051671936007683029}
+  - component: {fileID: 529648861877455676}
   m_Layer: 5
   m_Name: MainMenuUINetwork
   m_TagString: Untagged
@@ -1438,22 +1438,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4355197993534264380
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5785435955783414922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 272e8c6a5c1f12b409a86719f01fca69, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textFieldPort: {fileID: 4344613001005965909}
-  textFieldAddress: {fileID: 2307993187486782073}
-  player: {fileID: 0}
-  cameraPlayer: {fileID: 0}
 --- !u!114 &-6051671936007683029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1474,6 +1458,18 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &529648861877455676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5785435955783414922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712454e2d384101408a53dc734512528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5809560370501936936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2356,8 +2352,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4355197993534264380}
-        m_TargetAssemblyTypeName: JoinNetwork, Assembly-CSharp
+      - m_Target: {fileID: 529648861877455676}
+        m_TargetAssemblyTypeName: MainMenuUINetwork, Assembly-CSharp
         m_MethodName: StartLocalClient
         m_Mode: 1
         m_Arguments:

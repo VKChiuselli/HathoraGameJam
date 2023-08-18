@@ -10,7 +10,7 @@ namespace HathoraGameJam.CubicleEscape
     {
         public void Play()
         {
-            SceneManager.LoadScene(1);
+   //         SceneManager.LoadScene(1);
         }
 
         public void Credits()
@@ -20,7 +20,7 @@ namespace HathoraGameJam.CubicleEscape
 
         public void PrevScene()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+  //          SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
         
     }

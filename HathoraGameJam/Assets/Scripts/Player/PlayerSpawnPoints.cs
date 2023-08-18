@@ -26,6 +26,11 @@ public class PlayerSpawnPoints : NetworkBehaviour
 
             cinemachineTargetGroup.m_Targets.SetValue(target, 0);*/
 
+            if (TargetGroupManager.instance == null)
+            {
+                Debug.Log("(TargetGroupManager.instance is null");
+                return;
+            }
             TargetGroupManager.instance.AddToGroup(this.transform, 1, 1);
 
 
@@ -34,14 +39,14 @@ public class PlayerSpawnPoints : NetworkBehaviour
             //    listSpawnposition.Add(spawnPoint.position);
             //}
 
-            PlayerSpawnPoint = GameObject.Find("PlayerSpawnPoint");
+            //PlayerSpawnPoint = GameObject.Find("PlayerSpawnPoint");
 
-            if (PlayerSpawnPoint == null)
-            {
-                Debug.LogError("PlayerSpawnPoint is null");
-            }
+            //if (PlayerSpawnPoint == null)
+            //{
+            //    Debug.LogError("PlayerSpawnPoint is null");
+            //}
 
-              listSpawnposition = LoadSpawnPoint();
+            //  listSpawnposition = LoadSpawnPoint();
 
             transform.position = listSpawnposition[(int)OwnerClientId];
         }

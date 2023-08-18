@@ -17,34 +17,27 @@ public class PlayerGainPoints : MonoBehaviour
     {
         isExhausted = false;
         currentPoints = 0;
-        scoreBoard = GameObject.Find("ScoreBoardManagerCanvas").GetComponent<ScoreboardManager>();
+      //  scoreBoard = GameObject.Find("ScoreBoardManagerCanvas").GetComponent<ScoreboardManager>();
     }
 
-    //private void Update()
-    //{
-    //    if (!isExhausted)
-    //    {
-    //        if (Input.GetKey(KeyCode.Q))
-    //        {
-    //            if (!qKeyHeld)
-    //            {
-    //                qKeyHeld = true;
-    //                holdStartTime = Time.time;
-    //            }
+    private void Update()
+    {
+        if (scoreBoard == null)
+        {
+            GameObject scoreBoardManagerCanvas = GameObject.Find("ScoreBoardManagerCanvas") ;
+            if (scoreBoardManagerCanvas != null)
+            {
+                if (scoreBoardManagerCanvas.GetComponent<ScoreboardManager>() != null)
+                {
+                    scoreBoard = scoreBoardManagerCanvas.GetComponent<ScoreboardManager>();
+                }
+            
+             //   scoreBoard = ;
 
-    //            if (qKeyHeld && Time.time - holdStartTime >= holdDurationRequired)
-    //            {
+            }
+        }
 
-    //                MyMethodToCall();
-    //            }
-    //        }
-    //        else
-    //        {
-    //            qKeyHeld = false;
-    //        }
-    //    }
-      
-    //}
+    }
 
 
     public void GainPoints(int amount)

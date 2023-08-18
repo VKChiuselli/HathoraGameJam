@@ -1,4 +1,5 @@
 using Hathora.Cloud.Sdk.Model;
+using Hathora.Core.Scripts.Runtime.Client.ApiWrapper;
 using Hathora.Demos._1_FishNetDemo.HathoraScripts.Client.ClientMgr;
 using System;
 using System.Collections;
@@ -9,11 +10,12 @@ public class ShowRoomsAvaiableNetwork : MonoBehaviour
 {
     GameObject MainMenuPageCanvas;
    [SerializeField] GameObject LobbyRoom;
-   [SerializeField] GameObject WhereSpawnLobbyRoom ;
+   [SerializeField] GameObject RoomListContent;
    public List<Lobby> listOflobbies;
-    void Start()
+    void Awake()
     {
-        MainMenuPageCanvas = GameObject.Find("MainMenuPageCanvas");
+        MainMenuPageCanvas = GameObject.Find("[MainMenuPageCanvas]");
+        MainMenuPageCanvas.GetComponent<HathoraClientLobbyApi>().LoadLobbies();
     }
 
     public void SetLobbies(List<Lobby> lobbies)
@@ -23,7 +25,7 @@ public class ShowRoomsAvaiableNetwork : MonoBehaviour
         {
             if ( RoomIdAlreadyExist(lobby.RoomId))
             {
-                GameObject lobbyRoom = Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
+                GameObject lobbyRoom = Instantiate(LobbyRoom, RoomListContent.transform);
                 lobbyRoom.GetComponent<LobbyRoom>().SetLobby(lobby);
             }
        
@@ -35,7 +37,7 @@ public class ShowRoomsAvaiableNetwork : MonoBehaviour
         foreach (Lobby lobby in listOflobbies)
         {
 
-            foreach (Transform room in WhereSpawnLobbyRoom.transform)
+            foreach (Transform room in RoomListContent.transform)
             {
                 if(room.gameObject.GetComponent<LobbyRoom>().idRoom == roomId)
                 {
@@ -50,7 +52,7 @@ public class ShowRoomsAvaiableNetwork : MonoBehaviour
 
     private void DestroyRooms()
     {
-       foreach(GameObject room in WhereSpawnLobbyRoom.transform)
+       foreach(GameObject room in RoomListContent.transform)
         {
             DestroyImmediate(room);
         }

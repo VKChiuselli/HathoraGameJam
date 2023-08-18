@@ -21,18 +21,23 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
 
     public ulong currentPlayerId;
 
-    private void Start()
-    {
-        currentPlayerId = NetworkManager.LocalClient.ClientId;
-        progressBarUI.GetComponent<ProgressBarUI>().tooltipText.text = "Hold Q";
-        isExhausted.Value = false;
-        if (howMuchPointGiveThisObject == 0)
-        {
-        howMuchPointGiveThisObject = 20;
-        }
-        scoreBoard = GameObject.Find("ScoreBoardManagerCanvas").GetComponent<ScoreboardManager>();
-    }
 
+    public override void OnNetworkSpawn()
+    {
+        if (IsClient)
+        {
+            currentPlayerId = NetworkManager.LocalClient.ClientId;
+            progressBarUI.GetComponent<ProgressBarUI>().tooltipText.text = "Hold Q";
+            isExhausted.Value = false;
+            if (howMuchPointGiveThisObject == 0)
+            {
+                howMuchPointGiveThisObject = 20;
+            }
+            scoreBoard = GameObject.Find("ScoreBoardManagerCanvas").GetComponent<ScoreboardManager>();
+        }
+        isExhausted.OnValueChanged += isExhausted_OnValueChanged;
+
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -162,12 +167,6 @@ public class GainPointsKeepPressed : NetworkBehaviour, IHasProgress
     private bool oneTime;
 
     public event EventHandler<IHasProgress.OnProgressChangedEventArgs> OnProgressChanged;
-
-    public override void OnNetworkSpawn()
-    {
-        isExhausted.OnValueChanged += isExhausted_OnValueChanged;
-    
-    }
 
    
 

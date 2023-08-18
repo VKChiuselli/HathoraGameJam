@@ -37,8 +37,8 @@ public class MenuManager : NetworkBehaviour
         });
         CreateRoomButton.GetComponent<Button>().onClick.AddListener(() =>
         {
-            CreateLobbyRoom(namePlayer);
-            //        StartCoroutine( CreateRoom());
+    //        CreateLobbyRoom(namePlayer);
+                   CreateLobbyRoom();
         });
 
     }
@@ -80,7 +80,7 @@ public class MenuManager : NetworkBehaviour
         string url = "  https://api.hathora.dev/rooms/v2/" + appId + "/create";
   
 
-        CreateLobbyRoomServerRpc(namePlayer);
+         
  //       CreateLobbyRoom(namePlayer);
         RoomConfig config = new RoomConfig();
         config.visibility = "public";
@@ -113,32 +113,23 @@ public class MenuManager : NetworkBehaviour
 
     }
 
-    [ServerRpc(RequireOwnership =false)]
-    private void CreateLobbyRoomServerRpc(string namePlayer)
-    {
-        CreateLobbyRoomClientRpc(namePlayer);
-    }
+  
 
-    [ClientRpc]
-    private void CreateLobbyRoomClientRpc(string namePlayer)
-    {
-        CreateLobbyRoom(namePlayer);
-    }
-
-    private void CreateLobbyRoom(string namePlayer)
+    private void CreateLobbyRoom( )
     {
         //  Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
-        GameObject roomEntry = GameObject.Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
-        string capitalizedString = char.ToUpper(namePlayer[0]) + namePlayer.Substring(1);
-        roomEntry.GetComponent<RoomEntryPrefabLogic>().roomName.text = capitalizedString + " 's Office";
-        thirdPanel.SetActive(true);
-        thirdPanel.GetComponent<RoomPollingNetwork>().SetOfficeName(capitalizedString + " 's Office");
+        //GameObject roomEntry = GameObject.Instantiate(LobbyRoom, WhereSpawnLobbyRoom.transform);
+        //string capitalizedString = char.ToUpper(namePlayer[0]) + namePlayer.Substring(1);
+        //roomEntry.GetComponent<RoomEntryPrefabLogic>().roomName.text = capitalizedString + " 's Office";
+        //thirdPanel.GetComponent<RoomPollingNetwork>().SetOfficeName(capitalizedString + " 's Office");
 
     // StartCoroutine(   CreateHathoraRoom());
  //-   StartCoroutine(   CreateHathoraLobby());
  //-   StartCoroutine(CallUpdateApp());
 
-        secondPanel.SetActive(false);
+        //TODO REACT AGAIN THEM
+      //thirdPanel.SetActive(true);
+      //secondPanel.SetActive(false);
     }
 
     string appId = "app-018cc4c5-87e4-41ec-ad55-1617b7c8f783";

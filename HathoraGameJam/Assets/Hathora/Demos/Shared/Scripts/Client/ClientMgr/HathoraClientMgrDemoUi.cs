@@ -98,10 +98,12 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
         public virtual void OnStopClientBtnClick() { }
         public virtual void OnStopHostBtnClick() { }
 
+        [SerializeField] TextMeshProUGUI SignatureText;
+
         public void OnAuthLoginBtnClick()
         {
+            PlayerPrefs.SetString("Name", SignatureText.text);   
             hathoraClientMgrBase.validateReqs();
-
             SetShowAuthTxt("<color=yellow>Logging in...</color>");
             _ = hathoraClientMgrBase.AuthLoginAsync(); // !await
         }

@@ -7,6 +7,7 @@ using Hathora.Cloud.Sdk.Api;
 using Hathora.Cloud.Sdk.Client;
 using Hathora.Cloud.Sdk.Model;
 using Hathora.Core.Scripts.Runtime.Client.Config;
+using HathoraGameJam.CubicleEscape;
 using UnityEngine;
 
 namespace Hathora.Core.Scripts.Runtime.Client.ApiWrapper
@@ -41,6 +42,8 @@ namespace Hathora.Core.Scripts.Runtime.Client.ApiWrapper
             this.lobbyApi = new LobbyV2Api(base.HathoraSdkConfig);
         }
 
+        [SerializeField] GameObject secondPanel;
+        [SerializeField] GameObject thirdPanel;
 
         #region Client Lobby Async Hathora SDK Calls
         /// <summary>
@@ -136,6 +139,44 @@ namespace Hathora.Core.Scripts.Runtime.Client.ApiWrapper
             
             return lobby;
         }
+
+        [SerializeField] GameObject roomEntryPrefabLogic;
+        [SerializeField] GameObject RoomListContent;
+
+        public async void LoadLobbies()
+        {
+            List<Lobby> listOfLobbies = new List<Lobby>();
+            listOfLobbies =  await   ClientListPublicLobbiesAsync();
+
+            if (listOfLobbies.Count == 0)
+            {
+                return;
+            }
+
+            if (RoomListContent.transform.childCount > 0)
+            {
+                foreach (Transform lobby in RoomListContent.transform)
+                {
+                    Destroy(lobby.gameObject);
+                }
+            }
+
+            foreach (Lobby lobby in listOfLobbies)
+            {
+            GameObject  newRoom =   Instantiate(roomEntryPrefabLogic, RoomListContent.transform);
+                newRoom.GetComponent<RoomEntryPrefabLogic>().roomId=lobby.RoomId;
+                newRoom.GetComponent<RoomEntryPrefabLogic>().roomName.text=lobby.CreatedBy;
+                newRoom.GetComponent<RoomEntryPrefabLogic>().playerCount.text= "1/8";
+                newRoom.GetComponent<RoomEntryPrefabLogic>().secondPanel = secondPanel;
+                newRoom.GetComponent<RoomEntryPrefabLogic>().thirdPanel = thirdPanel;
+            }
+
+       
+            Debug.Log("Prova lobby: " + listOfLobbies[0].AppId);
+            Debug.Log("Prova lobby: " + listOfLobbies[0].RoomId);
+            Debug.Log("Prova lobby: " + listOfLobbies[0].Region);
+        }
+
 
         /// <summary>
         /// </summary>

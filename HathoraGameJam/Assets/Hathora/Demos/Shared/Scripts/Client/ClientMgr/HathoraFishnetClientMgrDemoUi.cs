@@ -107,7 +107,7 @@ namespace Hathora.Demos._1_FishNetDemo.HathoraScripts.Client.ClientMgr
             base.OnJoinLobbyAsClientBtnClick();
             Connect();
         }
-
+        //TODO Create a new class that call this method from UI button "Join room" in the main menu scene, and pass connectioninfo, now learn how to get connInfo
         // Added by Robin Cormie @ Lost Crow Games
         public new void OnJoinRoomAsClientBtnClick(ConnectionInfo connectionInfo)
         {

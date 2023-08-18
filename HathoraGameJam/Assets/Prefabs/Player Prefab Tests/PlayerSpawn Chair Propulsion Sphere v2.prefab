@@ -315,8 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caec89a087a53a541aa30d5a45597ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  confettiCannonProjectile: {fileID: 8627159436947186767, guid: 9c4930d38ae63724f98710148803e249, type: 3}
-  stickyNoteProjectile: {fileID: 36056773594479401, guid: 4ec274dbff0135647b81297abe0c57f7, type: 3}
+  confettiCannonProjectile: {fileID: 922142575276865756, guid: 9c4930d38ae63724f98710148803e249, type: 3}
+  stickyNoteProjectile: {fileID: 4485500714663790240, guid: 4ec274dbff0135647b81297abe0c57f7, type: 3}
   confettiCannonProjectileShootForce: 10
 --- !u!114 &7773874551094775316
 MonoBehaviour:
