@@ -76,4 +76,9 @@ public class SelectCharacter : MonoBehaviour
 
     }
 
+    public void SaveAvatarIndex()
+    {
+        PlayerPrefs.SetInt("AvatarIndex", indexCharacter);
+    }
+
 }
