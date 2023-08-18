@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class RoomPollingNetwork : NetworkBehaviour
 {
@@ -50,6 +51,11 @@ public class RoomPollingNetwork : NetworkBehaviour
     private void TryClientRpc()
     {
         Debug.Log("try");
+    }
+
+    public void ChangeScene()
+    {
+        SceneManager.LoadScene(1);
     }
 
     public override void OnNetworkSpawn()
