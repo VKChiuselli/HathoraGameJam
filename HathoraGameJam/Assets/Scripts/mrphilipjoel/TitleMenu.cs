@@ -8,20 +8,25 @@ namespace HathoraGameJam.CubicleEscape
 {
     public class TitleMenu : MonoBehaviour
     {
+        [Header("Credits Panels")]
+        public GameObject leftPanel;
+        public GameObject rightPanel;
         public void Play()
         {
-   //         SceneManager.LoadScene(1);
+            SceneManager.LoadScene(1);
         }
 
         public void Credits()
         {
-            Debug.LogWarning("Credits Screen has not been created yet!");
+            leftPanel.active = (!leftPanel.active);
+            rightPanel.active = (!rightPanel.active);
         }
 
         public void PrevScene()
         {
-  //          SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
+
         
     }
 }
