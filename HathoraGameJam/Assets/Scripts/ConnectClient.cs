@@ -63,25 +63,9 @@ public class ConnectClient : NetworkBehaviour
             m_Transport.SetConnectionData(address, 7777);
         }
 
-        NetworkManager.Singleton.StartClient();
+   //     NetworkManager.Singleton.StartClient();
 
-
-        //ut.GetComponent<UnityTransport>().ConnectionData.Port = portUshort;
-        //ut.GetComponent<UnityTransport>().ConnectionData.Address = address;
-
-
-        //   SceneManager.LoadScene("GameFieldOfficial" );
-        //SceneManager.UnloadSceneAsync("MainMenuScene" );
-
-        //if (status != SceneEventProgressStatus.Started)
-        //{
-        //    Debug.LogWarning($"Failed to load GameFieldOfficial" +
-        //          $"with a {nameof(SceneEventProgressStatus)}: {status}");
-        //}
-
-
-        //MainMenuScene
-        //      Hide(); //TODO Change Scene
+ 
     }
 
     private void Hide()

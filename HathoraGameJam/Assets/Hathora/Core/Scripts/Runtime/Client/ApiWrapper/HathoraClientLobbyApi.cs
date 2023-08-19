@@ -201,7 +201,7 @@ namespace Hathora.Core.Scripts.Runtime.Client.ApiWrapper
                 GameObject  newRoom =   Instantiate(roomEntryPrefabLogic, RoomListContent.transform);
                 RoomEntryPrefabLogic logic = newRoom.GetComponent<RoomEntryPrefabLogic>();
 
-                logic.roomId=lobby.CreatedBy;
+                logic.roomId=lobby.RoomId;
                 logic.roomName.text = lobbyData.lobbyName + "'s Room";
                 logic.playerCount.text = "";
                 logic.secondPanel = secondPanel;
@@ -209,7 +209,8 @@ namespace Hathora.Core.Scripts.Runtime.Client.ApiWrapper
 
                 if (connectioninfo != null)
                 {
-                    logic.port = connectioninfo.ExposedPort.Port;
+                 
+                    logic.port = connectioninfo.ExposedPort.Port.ToString("F0");
 
                     string host = connectioninfo.ExposedPort.Host;
                     IPAddress[] addresslist = Dns.GetHostAddresses(host);
@@ -219,11 +220,6 @@ namespace Hathora.Core.Scripts.Runtime.Client.ApiWrapper
                 
 
             }
-
-       
-            Debug.Log("Prova lobby: " + listOfLobbies[0].AppId);
-            Debug.Log("Prova lobby: " + listOfLobbies[0].RoomId);
-            Debug.Log("Prova lobby: " + listOfLobbies[0].Region);
         }
 
 

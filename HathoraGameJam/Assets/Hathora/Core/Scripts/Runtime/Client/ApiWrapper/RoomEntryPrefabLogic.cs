@@ -9,7 +9,7 @@ using Unity.Netcode.Transports.UTP;
 
 namespace HathoraGameJam.CubicleEscape
 {
-    public class RoomEntryPrefabLogic :  MonoBehaviour//NetworkBehaviour
+    public class RoomEntryPrefabLogic :  MonoBehaviour
     {
         public TextMeshProUGUI roomName, playerCount;
         public TextMeshProUGUI hostText, portText;
@@ -18,7 +18,7 @@ namespace HathoraGameJam.CubicleEscape
         public GameObject secondPanel;
         public GameObject thirdPanel;
 
-        public double port;
+        public string port;
         public string address;
 
         private NetworkManager networkManager;
@@ -28,35 +28,41 @@ namespace HathoraGameJam.CubicleEscape
         {
             Debug.Log(port);
             Debug.Log(address);
-            joinButton.onClick.AddListener(JoinRoom);
+            joinButton.onClick.AddListener(Join_Room);
             //[MainMenuPageCanvas]
         }
 
-        private void JoinRoom()
-        {
-            Debug.Log("Join Room");
-            GameObject goNetworkManager = GameObject.Find("NetworkManager");
+        //private void JoinRoom()
+        //{
+        //    Debug.Log("Join Room");
+        //    GameObject goNetworkManager = GameObject.Find("NetworkManager");
 
-            if (goNetworkManager != null)
-            {
-                networkManager = goNetworkManager.GetComponent<NetworkManager>();
+        //    if (goNetworkManager != null)
+        //    {
+        //        networkManager = goNetworkManager.GetComponent<NetworkManager>();
 
-                if (networkManager != null)
-                {
-                    unityTransport = networkManager.GetComponent<UnityTransport>();
-                }
-            }
+        //        if (networkManager != null)
+        //        {
+        //            unityTransport = networkManager.GetComponent<UnityTransport>();
+        //        }
+        //    }
 
-            if (networkManager && unityTransport != null)
-            {
-                unityTransport.ConnectionData.Address = address;
-                unityTransport.ConnectionData.Port = (ushort)port;
+ 
+        //    if (networkManager && unityTransport != null)
+        //    {
+        //        unityTransport.ConnectionData.Address = "35.71.157.211";
+        //       // unityTransport.ConnectionData.Address = address;
+        //        unityTransport.ConnectionData.Port = (ushort)port;
 
-                networkManager.StartClient();
-            }
-        }
+        //        networkManager.StartClient();
+        //    }
 
-        /*private async void Join_Room()
+        //    secondPanel.SetActive(false);
+        //    thirdPanel.SetActive(true);
+
+        //}
+
+         private async void Join_Room()
         {
             GameObject mainMenuPageCanvas = GameObject.Find("[MainMenuPageCanvas]");
 
@@ -72,20 +78,73 @@ namespace HathoraGameJam.CubicleEscape
             ShowDataToJoinNetwork(connectionInfoV2.ExposedPort.Host, connectionInfoV2.ExposedPort.Port);
             thirdPanel.SetActive(true);
             secondPanel.SetActive(false);
-            //GameObject thirdPanel = GameObject.Find("[MainMenuPageCanvas]/ThirdPanel(RoomJoined&RoomPollingNetwork)");
 
-            //thirdPanel.SetActive(true);
+           GameObject goNetworkManager = GameObject.Find("NetworkManager");
 
-            //GameObject secondPanel = GameObject.Find("[MainMenuPageCanvas]/SecondPanel(CreateRoomOrJoin)");
+            StartClient(goNetworkManager);
 
-            //secondPanel.SetActive(false);
+            //if (goNetworkManager != null)
+            //{
+            //    networkManager = goNetworkManager.GetComponent<NetworkManager>();
+
+            //    if (networkManager != null)
+            //    {
+            //        unityTransport = networkManager.GetComponent<UnityTransport>();
+            //    }
+            //}
 
 
-        }*/
+            //if (networkManager && unityTransport != null)
+            //{
+            //    unityTransport.ConnectionData.Address = "35.71.157.211";
+            //    // unityTransport.ConnectionData.Address = address;
+            //    unityTransport.ConnectionData.Port = PlayerPrefs.GetString("port") ;
+
+            //    networkManager.StartClient();
+            //}
 
 
+        }
 
-        /*public void ShowDataToJoinNetwork(string host, double doublePort)
+
+        public void StartClient( GameObject goNetworkManager)
+        {
+            UnityTransport m_Transport = goNetworkManager.GetComponent<UnityTransport>();
+            address = SanitizeInput(address);
+            port = SanitizeInput(port);
+
+
+            if (address == "")
+            {
+                Debug.Log("eRROR address!!");
+                StopAllCoroutines();
+                //todo show in the UI an error
+                return;
+            }
+            if (port == "")
+            {
+                Debug.Log("eRROR port!!");
+                StopAllCoroutines();
+                //todo show in the UI an error
+                return;
+            }
+
+            if (ushort.TryParse(port, out ushort uport))
+            {
+                m_Transport.SetConnectionData(address, uport);
+            }
+            else
+            {
+                m_Transport.SetConnectionData(address, 7777);
+            }
+
+            NetworkManager.Singleton.StartClient();
+
+
+        }
+
+
+        public void ShowDataToJoinNetwork(string host, double doublePort)
         {
           //  UnityTransport m_Transport = ut.GetComponent<UnityTransport>();
             //TODO convert the host to the ip address   address = host;
@@ -133,7 +192,7 @@ namespace HathoraGameJam.CubicleEscape
       //      Debug.Log("port " + port + " address " + address);
       ////      NetworkManager.Singleton.StartClient();
 
-        }*/
+        } 
 
 
         static string SanitizeInput(string dirtyString)

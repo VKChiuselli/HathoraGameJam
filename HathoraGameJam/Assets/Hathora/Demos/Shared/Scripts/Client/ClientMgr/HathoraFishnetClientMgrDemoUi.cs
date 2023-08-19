@@ -74,7 +74,7 @@ namespace Hathora.Demos._1_FishNetDemo.HathoraScripts.Client.ClientMgr
             }
 
             base.OnStartClientBtnClick(_hostPortOverride); // Logs
-            HathoraClientMgrNGO.Singleton.StartClient(_hostPortOverride);
+    //        HathoraClientMgrNGO.Singleton.StartClient(_hostPortOverride);
         }
 
         public override void OnStartHostBtnClick()

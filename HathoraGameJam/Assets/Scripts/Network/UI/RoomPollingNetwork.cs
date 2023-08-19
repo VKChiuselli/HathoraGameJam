@@ -15,42 +15,32 @@ public class RoomPollingNetwork : NetworkBehaviour
 
     [SerializeField] TextMeshProUGUI PlayerJoinedText;
     [SerializeField] Button readyGameButton;
+    [SerializeField] Button StartGameButton;
+    [SerializeField] Button refreshGameButton;
+    [SerializeField] GameObject thirdPanel;
     Dictionary<ulong, bool> playerReadyDictionary;
     Dictionary<ulong, string> playerNameDictionary;
 
     void Start()
     {
         readyGameButton.onClick.AddListener(ReadyGameButton);
+        StartGameButton.onClick.AddListener(StartGame);
+        refreshGameButton.onClick.AddListener(RefreshNames);
         //     Time.timeScale = 0;
         playerReadyDictionary = new Dictionary<ulong, bool>();
         playerNameDictionary = new Dictionary<ulong, string>();
 
-        //if (IsClient && IsOwner)
-        //{
-        //SetName();
-        //}
+
+    }
+
+    private void RefreshNames()
+    {
+        SetName();
     }
 
     public void SetName()
     {
         SetNameServerRpc(PlayerPrefs.GetString("Name"));
-    }
-
-    public void Try()
-    {
-        TryServerRpc( );
-    }
-
-    [ServerRpc(RequireOwnership =false)]
-    private void TryServerRpc()
-    {
-        TryClientRpc();
-    }
-
-    [ClientRpc]
-    private void TryClientRpc()
-    {
-        Debug.Log("try");
     }
 
     public void ChangeScene()
@@ -67,36 +57,79 @@ public class RoomPollingNetwork : NetworkBehaviour
     }
 
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership =false)]
     public void StartGameServerRpc()
     {
-        StartGame();
+     bool areAllPlayerReady =   CheckDictionary();
+
+        if (areAllPlayerReady)
+        {
         StartGameClientRpc();
+        }
+        else
+        {
+            CantStartGameClientRpc();
+        }
+    }
+
+    [ClientRpc]
+    private void CantStartGameClientRpc()
+    {
+        Debug.Log("Not every player are ready");
+    }
+
+    private bool CheckDictionary()
+    {
+        bool allTrue = true;
+
+        foreach (var kvp in playerReadyDictionary)
+        {
+            if (!kvp.Value)
+            {
+                allTrue = false;
+                break;
+            }
+        }
+
+        return allTrue;
     }
 
     [ClientRpc]
     private void StartGameClientRpc()
     {
-        StartGame();
+        ChangeScene();
     }
 
     public void StartGame()
     {
-        Time.timeScale = 1;
+        //      Time.timeScale = 1;
+        Debug.Log("TODO: implement change scene but check if every player is ready");
+        StartGameServerRpc();
     }
 
-  
+
 
     public void ReadyGameButton()
     {
-        ReadyGameServerRpc();
+        if (PlayerPrefs.GetString("Name").Contains("is Ready"))
+        {
+            ReadyGameServerRpc(PlayerPrefs.GetString("Name"));
+
+        }
+        else
+        {
+            PlayerPrefs.SetString("Name", PlayerPrefs.GetString("Name") + "  is Ready");
+            ReadyGameServerRpc(PlayerPrefs.GetString("Name"));
+        }
+  
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void ReadyGameServerRpc(ServerRpcParams serverRpcParams = default)
+    private void ReadyGameServerRpc(string playerName, ServerRpcParams serverRpcParams = default)
     {
-        playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = true;
-        SetNameReadyServerRpc(PlayerPrefs.GetString("Name"));
+        playerNameDictionary[serverRpcParams.Receive.SenderClientId] = playerName;
+        string listOfPlayer = UpdateListOfPlayer();
+        SetNameClientRpc(listOfPlayer);
     }
 
 
@@ -105,27 +138,17 @@ public class RoomPollingNetwork : NetworkBehaviour
     {
         string namePlayer = playername + " " + serverRpcParams.Receive.SenderClientId;  //TODO = PlayerPrefs.GetString("Name);
         playerNameDictionary[serverRpcParams.Receive.SenderClientId] = namePlayer;
-        SetNameClientRpc(namePlayer, serverRpcParams.Receive.SenderClientId);
+        string listOfPlayer = UpdateListOfPlayer();
+        SetNameClientRpc(listOfPlayer);
     }
-
-
-    [ServerRpc(RequireOwnership = false)]
-    private void SetNameReadyServerRpc(string playername, ServerRpcParams serverRpcParams = default)
-    {
-        string namePlayer = playername + " " + serverRpcParams.Receive.SenderClientId + " is Ready";  //TODO =;
-        playerNameDictionary[serverRpcParams.Receive.SenderClientId] = namePlayer;
-        SetNameClientRpc(namePlayer, serverRpcParams.Receive.SenderClientId);
-    }
-
 
     [ClientRpc]
-    private void SetNameClientRpc(string namePlayer, ulong playerId)
+    private void SetNameClientRpc(string listOfPlayer)
     {
-        playerNameDictionary[playerId] = namePlayer; //TODO = PlayerPrefs.GetString("Name);
-        UpdateListOfPlayer();
+        PlayerJoinedText.text = listOfPlayer;
     }
 
-    private void UpdateListOfPlayer()
+    private string UpdateListOfPlayer()
     {
         List<string> playerNames = new List<string>();
         //string result= "";
@@ -136,8 +159,8 @@ public class RoomPollingNetwork : NetworkBehaviour
             playerNames.Add(entry.Value);
 
         }
-
         PlayerJoinedText.text = string.Join("\n", playerNames);
+        return PlayerJoinedText.text;
     }
 
 
@@ -146,10 +169,10 @@ public class RoomPollingNetwork : NetworkBehaviour
     //{
     //    playerReadyDictionary[serverRpcParams.Receive.SenderClientId] = false;
     //}
- 
+
     public void SetOfficeName(string officeName)
     {
-      OfficeNameText.text = officeName; //Playerprefs.getstring("Name");
+        OfficeNameText.text = officeName; //Playerprefs.getstring("Name");
     }
 
 }

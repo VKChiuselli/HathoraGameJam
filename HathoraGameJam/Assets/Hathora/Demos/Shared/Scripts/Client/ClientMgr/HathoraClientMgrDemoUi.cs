@@ -13,7 +13,6 @@ using UnityEngine.UI;
 using System.Net;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
-using UnityEditor.Experimental.GraphView;
 
 namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
 {
@@ -146,7 +145,7 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
             createdLobby.AdditionalProperties = connectionProperties;
 
             Debug.Log(createdLobby.AdditionalProperties);
-            m_NetworkManager.StartClient();
+     //       m_NetworkManager.StartClient();
 
             //disable 2nd panel, enable 3rd panel, and spawn name entry in the scroll view
 
