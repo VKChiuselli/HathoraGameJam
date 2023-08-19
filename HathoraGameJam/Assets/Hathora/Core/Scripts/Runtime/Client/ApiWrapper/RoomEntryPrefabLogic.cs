@@ -64,7 +64,7 @@ namespace HathoraGameJam.CubicleEscape
 
          private async void Join_Room()
         {
-            GameObject mainMenuPageCanvas = GameObject.Find("[MainMenuPageCanvas]");
+            GameObject mainMenuPageCanvas = GameObject.Find("MainMenuScenePrefab/[MainMenuPageCanvas]");
 
             ConnectionInfoV2 connectionInfoV2 = await      mainMenuPageCanvas.GetComponent<HathoraClientRoomApi>().ClientGetConnectionInfoAsync(roomId);
 

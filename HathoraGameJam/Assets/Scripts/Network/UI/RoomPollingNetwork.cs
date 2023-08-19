@@ -18,6 +18,7 @@ public class RoomPollingNetwork : NetworkBehaviour
     [SerializeField] Button StartGameButton;
     [SerializeField] Button refreshGameButton;
     [SerializeField] GameObject thirdPanel;
+    [SerializeField] GameObject ScenePrefabManager;
     Dictionary<ulong, bool> playerReadyDictionary;
     Dictionary<ulong, string> playerNameDictionary;
 
@@ -45,7 +46,7 @@ public class RoomPollingNetwork : NetworkBehaviour
 
     public void ChangeScene()
     {
-        SceneManager.LoadScene(1);
+
     }
 
     public override void OnNetworkSpawn()
@@ -57,14 +58,14 @@ public class RoomPollingNetwork : NetworkBehaviour
     }
 
 
-    [ServerRpc(RequireOwnership =false)]
+    [ServerRpc(RequireOwnership = false)]
     public void StartGameServerRpc()
     {
-     bool areAllPlayerReady =   CheckDictionary();
+        bool areAllPlayerReady = CheckDictionary();
 
         if (areAllPlayerReady)
         {
-        StartGameClientRpc();
+            StartGameClientRpc();
         }
         else
         {
@@ -97,7 +98,7 @@ public class RoomPollingNetwork : NetworkBehaviour
     [ClientRpc]
     private void StartGameClientRpc()
     {
-        ChangeScene();
+        ScenePrefabManager.GetComponent<ScenePrefabManager>().StartGame();
     }
 
     public void StartGame()
@@ -121,7 +122,7 @@ public class RoomPollingNetwork : NetworkBehaviour
             PlayerPrefs.SetString("Name", PlayerPrefs.GetString("Name") + "  is Ready");
             ReadyGameServerRpc(PlayerPrefs.GetString("Name"));
         }
-  
+
     }
 
     [ServerRpc(RequireOwnership = false)]

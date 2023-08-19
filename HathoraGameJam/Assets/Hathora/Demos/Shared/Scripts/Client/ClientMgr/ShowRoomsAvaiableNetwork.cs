@@ -14,7 +14,7 @@ public class ShowRoomsAvaiableNetwork : MonoBehaviour
    public List<Lobby> listOflobbies;
     void Awake()
     {
-        MainMenuPageCanvas = GameObject.Find("[MainMenuPageCanvas]");
+        MainMenuPageCanvas = GameObject.Find("MainMenuScenePrefab/[MainMenuPageCanvas]");
         MainMenuPageCanvas.GetComponent<HathoraClientLobbyApi>().LoadLobbies();
     }
 
