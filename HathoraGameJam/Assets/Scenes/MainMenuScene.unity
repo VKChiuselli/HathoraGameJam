@@ -1430,7 +1430,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 823331016}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 5384282797443370897, guid: 392bcb442cab1a44aaee000680f3a8ef, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 157caf7605735614e8cd7852fd7fa93b, type: 2}
@@ -2182,6 +2182,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sdkDemoUi: {fileID: 969486922}
   helloWorldDemoUi: {fileID: 0}
+  m_NetworkManager: {fileID: 823331017}
+  hathoraClientMgrBase: {fileID: 0}
   hathoraLobbyPrefab: {fileID: 0}
   container: {fileID: 0}
   HathoraUiWrapperPnl: {fileID: 0}
@@ -2905,7 +2907,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 968502839}
   m_HandleRect: {fileID: 968502838}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

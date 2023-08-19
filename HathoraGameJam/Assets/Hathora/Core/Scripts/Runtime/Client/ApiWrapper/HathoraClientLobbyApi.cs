@@ -1,6 +1,7 @@
 // Created by dylan@hathora.dev
 
 using System.Collections.Generic;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Hathora.Cloud.Sdk.Api;
@@ -8,6 +9,7 @@ using Hathora.Cloud.Sdk.Client;
 using Hathora.Cloud.Sdk.Model;
 using Hathora.Core.Scripts.Runtime.Client.Config;
 using HathoraGameJam.CubicleEscape;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Hathora.Core.Scripts.Runtime.Client.ApiWrapper
@@ -25,6 +27,12 @@ namespace Hathora.Core.Scripts.Runtime.Client.ApiWrapper
     public class HathoraClientLobbyApi : HathoraClientApiWrapperBase
     {
         private LobbyV2Api lobbyApi;
+
+        
+        public class LobbyData
+        {
+            public string lobbyName;
+        }
 
         /// <summary>
         /// </summary>
@@ -161,14 +169,55 @@ namespace Hathora.Core.Scripts.Runtime.Client.ApiWrapper
                 }
             }
 
+
             foreach (Lobby lobby in listOfLobbies)
             {
-            GameObject  newRoom =   Instantiate(roomEntryPrefabLogic, RoomListContent.transform);
-                newRoom.GetComponent<RoomEntryPrefabLogic>().roomId=lobby.RoomId;
-                newRoom.GetComponent<RoomEntryPrefabLogic>().roomName.text=lobby.CreatedBy;
-                newRoom.GetComponent<RoomEntryPrefabLogic>().playerCount.text= "1/8";
-                newRoom.GetComponent<RoomEntryPrefabLogic>().secondPanel = secondPanel;
-                newRoom.GetComponent<RoomEntryPrefabLogic>().thirdPanel = thirdPanel;
+                Debug.Log(lobby.InitialConfig);
+
+                string json = lobby.InitialConfig.ToString(); // Your JSON string
+
+                // Deserialize the JSON string into a LobbyData object
+                LobbyData lobbyData = JsonConvert.DeserializeObject<LobbyData>(json);
+
+                ConnectionInfoV2 connectioninfo = null;
+                if (lobby.AdditionalProperties.TryGetValue("connectionInfo", out var value))
+                {
+                    if (value is ConnectionInfoV2 connectionInfoValue)
+                    {
+                        connectioninfo = connectionInfoValue;
+                        Debug.Log("connectioninfo = connectionInfoValue");
+                        // Now you can use the 'connectioninfo' variable
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Did not get Connection Info!!!");
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning("'connectionInfo' did not exist in the dictionary!!!");
+                }
+
+                GameObject  newRoom =   Instantiate(roomEntryPrefabLogic, RoomListContent.transform);
+                RoomEntryPrefabLogic logic = newRoom.GetComponent<RoomEntryPrefabLogic>();
+
+                logic.roomId=lobby.CreatedBy;
+                logic.roomName.text = lobbyData.lobbyName + "'s Room";
+                logic.playerCount.text = "";
+                logic.secondPanel = secondPanel;
+                logic.thirdPanel = thirdPanel;
+
+                if (connectioninfo != null)
+                {
+                    logic.port = connectioninfo.ExposedPort.Port;
+
+                    string host = connectioninfo.ExposedPort.Host;
+                    IPAddress[] addresslist = Dns.GetHostAddresses(host);
+
+                    logic.address = addresslist[0].ToString();
+                }
+                
+
             }
 
        

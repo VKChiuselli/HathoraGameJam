@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using Hathora.Core.Scripts.Runtime.Client.ApiWrapper;
 using Hathora.Cloud.Sdk.Model;
 using System.Text.RegularExpressions;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 
 namespace HathoraGameJam.CubicleEscape
 {
@@ -13,18 +15,48 @@ namespace HathoraGameJam.CubicleEscape
         public TextMeshProUGUI hostText, portText;
         public Button joinButton;
         public string roomId;
-        GameObject ut;
-    public    GameObject secondPanel;
+        public GameObject secondPanel;
         public GameObject thirdPanel;
+
+        public double port;
+        public string address;
+
+        private NetworkManager networkManager;
+        private UnityTransport unityTransport;
 
         private void Awake()
         {
-            joinButton.onClick.AddListener(Join_Room);
-            ut = GameObject.Find("NetworkManager");
+            Debug.Log(port);
+            Debug.Log(address);
+            joinButton.onClick.AddListener(JoinRoom);
             //[MainMenuPageCanvas]
         }
 
-        private async void Join_Room()
+        private void JoinRoom()
+        {
+            Debug.Log("Join Room");
+            GameObject goNetworkManager = GameObject.Find("NetworkManager");
+
+            if (goNetworkManager != null)
+            {
+                networkManager = goNetworkManager.GetComponent<NetworkManager>();
+
+                if (networkManager != null)
+                {
+                    unityTransport = networkManager.GetComponent<UnityTransport>();
+                }
+            }
+
+            if (networkManager && unityTransport != null)
+            {
+                unityTransport.ConnectionData.Address = address;
+                unityTransport.ConnectionData.Port = (ushort)port;
+
+                networkManager.StartClient();
+            }
+        }
+
+        /*private async void Join_Room()
         {
             GameObject mainMenuPageCanvas = GameObject.Find("[MainMenuPageCanvas]");
 
@@ -49,12 +81,11 @@ namespace HathoraGameJam.CubicleEscape
             //secondPanel.SetActive(false);
 
 
-        }
+        }*/
 
 
-        string port;
-        string address;
-        public void ShowDataToJoinNetwork(string host, double doublePort)
+
+        /*public void ShowDataToJoinNetwork(string host, double doublePort)
         {
           //  UnityTransport m_Transport = ut.GetComponent<UnityTransport>();
             //TODO convert the host to the ip address   address = host;
@@ -102,7 +133,7 @@ namespace HathoraGameJam.CubicleEscape
       //      Debug.Log("port " + port + " address " + address);
       ////      NetworkManager.Singleton.StartClient();
 
-        }
+        }*/
 
 
         static string SanitizeInput(string dirtyString)

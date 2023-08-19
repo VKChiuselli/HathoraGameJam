@@ -1,4 +1,4 @@
-// Created by dylan@hathora.dev
+﻿// Created by dylan@hathora.dev
 
 using System;
 using System.Collections.Generic;
@@ -10,6 +10,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using System.Net;
+using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
+using UnityEditor.Experimental.GraphView;
 
 namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
 {
@@ -35,7 +39,9 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
         // ###################################################################
         // public static HathoraHathoraNetUiBaseBase Singleton { get; protected set; }
         // ###################################################################
+        [SerializeField]NetworkManager m_NetworkManager;
 
+        UnityTransport m_Transport;
 
 
         private const float FADE_TXT_DISPLAY_DURATION_SECS = 0.5f;
@@ -43,7 +49,7 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
         private static string headerBoldColorBegin => $"<b><color={HATHORA_VIOLET_COLOR_HEX}>";
         private const string headerBoldColorEnd = "</color></b>";
 
-        private HathoraClientMgrBase hathoraClientMgrBase;
+        public HathoraClientMgrBase hathoraClientMgrBase;
 
         // Added by Robin Cormie @ Lost Crow Games
         public GameObject hathoraLobbyPrefab; // Reference to the HathoraLobby prefab
@@ -52,6 +58,7 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
         [SerializeField] private GameObject HathoraUiWrapperPnl;
         [SerializeField] private GameObject CustomLobbyCanvas;
 
+        public static HathoraClientMgrDemoUi instance;
         protected static HathoraClientSession HathoraClientSession =>
             HathoraClientSession.Singleton;
 
@@ -68,6 +75,11 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
         /// <summary>Override + Call InitOnStart</summary>
         protected virtual void OnStart()
         {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            m_Transport = m_NetworkManager.GetComponent<UnityTransport>();
             // InitOnStart(hathoraClientBase);
         }
 
@@ -108,14 +120,36 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
             _ = hathoraClientMgrBase.AuthLoginAsync(); // !await
         }
 
-        public void OnCreateLobbyBtnClick()
+        public async void OnCreateLobbyBtnClick()
         {
             SetShowLobbyTxt("<color=yellow>Creating Lobby...</color>");
-
+            string lobbyName = SignatureText.text.ToString();
             // (!) Region Index starts at 1 (not 0) // TODO: Get from UI
+            Debug.Log("Just so you know, we have this set to connect to London Servers...");
             const Region _region = Region.London;
+            Lobby createdLobby =  await hathoraClientMgrBase.CreateLobbyAsync(_region, CreateLobbyRequest.VisibilityEnum.Public, $"{{\"lobbyName\": \"{lobbyName}\"}}"); // !await // public lobby
+            Debug.Log(createdLobby);
+            ConnectionInfoV2 connectioninfo = await hathoraClientMgrBase.GetActiveConnectionInfo(createdLobby.RoomId);
+            Debug.Log(connectioninfo);
 
-            _ = hathoraClientMgrBase.CreateLobbyAsync(_region); // !await // public lobby
+            string host = connectioninfo.ExposedPort.Host;
+            IPAddress[] addresslist = Dns.GetHostAddresses(host);
+
+            m_Transport.ConnectionData.Address = addresslist[0].ToString();
+            m_Transport.ConnectionData.Port = (ushort)connectioninfo.ExposedPort.Port;
+
+            IDictionary<string, object> connectionProperties = new Dictionary<string, object>
+            {
+                { "connectionInfo", connectioninfo }, // Replace "key1" and value1 with your actual key and value
+                // Add more key-value pairs as needed
+            };
+            createdLobby.AdditionalProperties = connectionProperties;
+
+            Debug.Log(createdLobby.AdditionalProperties);
+            m_NetworkManager.StartClient();
+
+            //disable 2nd panel, enable 3rd panel, and spawn name entry in the scroll view
+
         }
 
         /// <summary>
