@@ -20,7 +20,7 @@ public class RoomPollingNetwork : NetworkBehaviour
     [SerializeField] GameObject thirdPanel;
     [SerializeField] GameObject ScenePrefabManager;
     Dictionary<ulong, bool> playerReadyDictionary;
-    Dictionary<ulong, string> playerNameDictionary;
+  public  Dictionary<ulong, string> playerNameDictionary;
 
     void Start()
     {
@@ -119,7 +119,7 @@ public class RoomPollingNetwork : NetworkBehaviour
     {
         playerNameDictionary[serverRpcParams.Receive.SenderClientId] = playerName;
         string listOfPlayer = UpdateListOfPlayer();
-        SetNameClientRpc(listOfPlayer);
+        SetNameClientRpc(listOfPlayer, serverRpcParams.Receive.SenderClientId, playerName);
     }
 
 
@@ -129,12 +129,13 @@ public class RoomPollingNetwork : NetworkBehaviour
         string namePlayer = playername + " " + serverRpcParams.Receive.SenderClientId;  //TODO = PlayerPrefs.GetString("Name);
         playerNameDictionary[serverRpcParams.Receive.SenderClientId] = namePlayer;
         string listOfPlayer = UpdateListOfPlayer();
-        SetNameClientRpc(listOfPlayer);
+        SetNameClientRpc(listOfPlayer, serverRpcParams.Receive.SenderClientId, namePlayer);
     }
 
     [ClientRpc]
-    private void SetNameClientRpc(string listOfPlayer)
+    private void SetNameClientRpc(string listOfPlayer, ulong senderClientId, string namePlayer)
     {
+        playerNameDictionary[senderClientId] = namePlayer;
         PlayerJoinedText.text = listOfPlayer;
     }
 

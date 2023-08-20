@@ -18055,6 +18055,10 @@ PrefabInstance:
       propertyPath: PlayAgainButton
       value: 
       objectReference: {fileID: 528778570}
+    - target: {fileID: 2263467413454495898, guid: 29e0a0b82051b024b976478ab2b33c05, type: 3}
+      propertyPath: roomPollingNetwork
+      value: 
+      objectReference: {fileID: 1223360474}
     - target: {fileID: 3300946297544018628, guid: 29e0a0b82051b024b976478ab2b33c05, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -24496,6 +24500,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2557602442990125496, guid: b5aebe76ee282a14baeee8a77a6e851c, type: 3}
   m_PrefabInstance: {fileID: 1214501459}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1223360474 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6737595618403648496, guid: 119b84e7106176e40b9d83184c7dd5b7, type: 3}
+  m_PrefabInstance: {fileID: 35759880}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1fdfafdce70c274c9e823b4a6c485a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1234653034
 GameObject:
   m_ObjectHideFlags: 0

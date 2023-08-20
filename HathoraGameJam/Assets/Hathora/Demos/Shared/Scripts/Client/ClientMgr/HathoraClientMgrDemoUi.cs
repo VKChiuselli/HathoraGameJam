@@ -131,6 +131,8 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
             ConnectionInfoV2 connectioninfo = await hathoraClientMgrBase.GetActiveConnectionInfo(createdLobby.RoomId);
             Debug.Log(connectioninfo);
 
+            PlayerCanPressJoinButton();
+
             string host = connectioninfo.ExposedPort.Host;
             IPAddress[] addresslist = Dns.GetHostAddresses(host);
 
@@ -149,6 +151,13 @@ namespace Hathora.Demos.Shared.Scripts.Client.ClientMgr
 
             //disable 2nd panel, enable 3rd panel, and spawn name entry in the scroll view
 
+        }
+
+     [SerializeField]   TextMeshProUGUI advertiserToJoin;
+
+        private void PlayerCanPressJoinButton()
+        {
+            advertiserToJoin.text = "You can NOW Join a room!";
         }
 
         /// <summary>

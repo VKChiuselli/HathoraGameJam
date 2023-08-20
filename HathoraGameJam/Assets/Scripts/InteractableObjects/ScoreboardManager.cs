@@ -16,10 +16,11 @@ public class ScoreboardManager : NetworkBehaviour
     [SerializeField] GameObject FinalScorePanel;
     [SerializeField] GameObject ScoreBoardPanel;
     [SerializeField] Button PlayAgainButton;
+    [SerializeField] RoomPollingNetwork roomPollingNetwork;
 
     private PlayerScoreUI[] playerScoreUIs = new PlayerScoreUI[8];
 
-
+    string finalScoreStorer;
     public static ScoreboardManager Instance { get; private set; }
 
     private void Awake()
@@ -53,10 +54,34 @@ public class ScoreboardManager : NetworkBehaviour
     private void ShowFinalScoreClientRpc()
     {
         FinalScorePanel.SetActive(true);
-        //FinalScoreBoardText.text = ScoreBoardUIText.text;
+        GenerateRecapString();
         ScoreBoardPanel.SetActive(false);
         Time.timeScale = 0;
         //TODO create a function that orders the highest score to the lowest
+    }
+
+    public void GenerateRecapString()
+    {
+        FinalScoreBoardText.text = "Final results:\n";
+
+        foreach (var kvp in playerPointsDictionary)
+        {
+            string name = ConvertUlongToName(kvp.Key);
+            FinalScoreBoardText.text += name + ": " + kvp.Value + "\n";
+        }
+    }
+
+    private string ConvertUlongToName(ulong key)
+    {
+        if (roomPollingNetwork.playerNameDictionary.TryGetValue(key, out string value))
+        {
+
+            return value.Replace(" is Ready", "");
+        }
+        else
+        {
+            return "NoPlayerFound";
+        }
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -94,14 +119,31 @@ public class ScoreboardManager : NetworkBehaviour
 
         }
 
-        //ScoreBoardUIText.text = result;
-
 
     }
 
     private void UpdateNameBoard(KeyValuePair<ulong, int> entry, string playerName)
     {
+        int amount = (int)entry.Key;
         playerScoreUIs[(int)entry.Key].UpdateName(playerName + (int)entry.Key);
+        //   SetDictionaryValue(playerName, amount);
     }
+
+    public void SetDictionaryValue(string key, int value)
+    {
+        //if (playerNamePointsDictionary.ContainsKey(key))
+        //{
+        //    playerNamePointsDictionary[key] = value;
+        //}
+        //else
+        //{
+        //    playerNamePointsDictionary.Add(key, value);
+        //}
+    }
+
+
+
+
+
 
 }
