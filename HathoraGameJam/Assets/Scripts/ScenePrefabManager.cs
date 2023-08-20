@@ -16,7 +16,8 @@ public class ScenePrefabManager : MonoBehaviour
     [SerializeField] GameObject TimerUICanvas;
     [SerializeField] GameObject spawnWeaponPowerUpManager;
     [SerializeField] GameObject CameraStuff;
-
+    public GameObject MainCameraTitleScene;
+    [SerializeField]  GameObject MainCameraGame;
 
     void Start()
     {
@@ -29,6 +30,8 @@ public class ScenePrefabManager : MonoBehaviour
     {
         MainMenuScenePrefab.SetActive(true);
         TitleScenePrefab.SetActive(false);
+        MainCameraGame.SetActive(true);
+        MainCameraTitleScene.SetActive(false);
     }
 
     public void StartGame()
@@ -40,5 +43,6 @@ public class ScenePrefabManager : MonoBehaviour
         TitleScenePrefab.SetActive(false);
         TimerUICanvas.GetComponent<TimerUI>().isGameStarted = true;
         CameraStuff.SetActive(true);
+        MainCameraGame.SetActive(true);
     }
 }

@@ -8,7 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UniqueSceneToPlay.unity
     guid: 2157cca19b79a1e40a7fe600b7e393d7
-  - enabled: 1
-    path: Assets/Scenes/GameFieldOfficial.unity
-    guid: fe9aecb9433970e43a0a00489c89e127
   m_configObjects: {}

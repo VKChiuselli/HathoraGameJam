@@ -13,9 +13,12 @@ namespace HathoraGameJam.CubicleEscape
         public GameObject rightPanel;
         public GameObject TitleScenePrefab;
         public GameObject MainMenuScenePrefab;
-        public void Play()
+        public GameObject MainCameraTitleScene;
+        public GameObject MainCameraGame;
+
+        private void Start()
         {
-            SceneManager.LoadScene(1);
+       
         }
 
         public void Credits()
@@ -28,7 +31,9 @@ namespace HathoraGameJam.CubicleEscape
         {
             TitleScenePrefab.SetActive(true);
             MainMenuScenePrefab.SetActive(true);
-       //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            MainCameraGame.SetActive(false);
+            MainCameraTitleScene.SetActive(true);
+            //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
 
         

@@ -11,6 +11,11 @@ public class TimerUI : NetworkBehaviour
     private NetworkVariable<int> timeRemaining = new NetworkVariable<int>(3 * 60);
     public bool isGameStarted;
 
+    private void Start()
+    {
+        isGameStarted = false;
+    }
+
     public override void OnNetworkSpawn()
     {
         if (IsOwner)
