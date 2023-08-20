@@ -14,7 +14,7 @@ public class ScoreboardManager : NetworkBehaviour
     [SerializeField] GameObject FinalScorePanel;
     [SerializeField] GameObject ScoreBoardPanel;
 
-    private PlayerScoreUI[] playerScoreUIs = new PlayerScoreUI[4];
+    private PlayerScoreUI[] playerScoreUIs = new PlayerScoreUI[8];
 
 
     public static ScoreboardManager Instance { get; private set; }
@@ -31,7 +31,8 @@ public class ScoreboardManager : NetworkBehaviour
 
     public void SetPlayerPoints(int updatedAmount)
     {
-        SetPlayerPointsServerRpc(updatedAmount);
+        string playerNameFiltered = PlayerPrefs.GetString("Name").Replace(" is Ready", "");
+        SetPlayerPointsServerRpc(updatedAmount, playerNameFiltered);
     }
 
     public void ShowFinalScore()
@@ -50,14 +51,14 @@ public class ScoreboardManager : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SetPlayerPointsServerRpc(int updatedAmount, ServerRpcParams serverRpcParams = default)
+    private void SetPlayerPointsServerRpc(int updatedAmount, string playerName, ServerRpcParams serverRpcParams = default)
     {
         Debug.Log("SetPlayerPointsServerRPC");
-        UpdateScoreBoardUIClientRpc(updatedAmount, serverRpcParams.Receive.SenderClientId);
+        UpdateScoreBoardUIClientRpc(updatedAmount, playerName, serverRpcParams.Receive.SenderClientId);
     }
 
     [ClientRpc]
-    private void UpdateScoreBoardUIClientRpc(int updatedAmount, ulong senderClientId)
+    private void UpdateScoreBoardUIClientRpc(int updatedAmount, string playerName, ulong senderClientId)
     {
         playerPointsDictionary[senderClientId] = updatedAmount;
         //string result= "";
@@ -74,7 +75,7 @@ public class ScoreboardManager : NetworkBehaviour
                 playerScoreUIs[(int)entry.Key] = ScoreBoardPanel.transform.GetChild((int)entry.Key).GetComponent<PlayerScoreUI>();
 
                 //update the player name (using number for now)
-                playerScoreUIs[(int)entry.Key].UpdateName("Player " + (int)entry.Key);
+                UpdateNameBoard(entry, playerName);
             }
 
             playerScoreUIs[(int)entry.Key].UpdateScore(entry.Value);
@@ -89,10 +90,9 @@ public class ScoreboardManager : NetworkBehaviour
 
     }
 
-
-    // Update is called once per frame
-    void Update()
+    private void UpdateNameBoard(KeyValuePair<ulong, int> entry, string playerName)
     {
-
+        playerScoreUIs[(int)entry.Key].UpdateName(playerName + (int)entry.Key);
     }
+
 }
