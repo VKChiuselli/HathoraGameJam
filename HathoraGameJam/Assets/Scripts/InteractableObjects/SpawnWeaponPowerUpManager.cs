@@ -29,6 +29,10 @@ public class SpawnWeaponPowerUpManager : NetworkBehaviour
 
     private void Update()
     {
+        if (!IsGameStarted)
+        {
+            return;
+        }
         if (!IsServer)
         {
             return;
@@ -42,7 +46,8 @@ public class SpawnWeaponPowerUpManager : NetworkBehaviour
 
     GameObject itemToSpawn;
 
-     
+    public bool IsGameStarted;
+
     private void SpawnObject ()
     {
         if (spawnPoints.Count == 0)

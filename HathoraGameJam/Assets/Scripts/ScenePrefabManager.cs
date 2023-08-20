@@ -2,14 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class ScenePrefabManager : MonoBehaviour
 {
 
+    [SerializeField] GameObject BossOne;
+    [SerializeField] GameObject BossTwo;
     [SerializeField] GameObject TitleScenePrefab;
     [SerializeField] Button TitleScenePrefabPlayButton;
     [SerializeField] GameObject MainMenuScenePrefab;
+    [SerializeField] GameObject TimerUICanvas;
+    [SerializeField] GameObject spawnWeaponPowerUpManager;
+    [SerializeField] GameObject CameraStuff;
 
 
     void Start()
@@ -27,7 +33,12 @@ public class ScenePrefabManager : MonoBehaviour
 
     public void StartGame()
     {
+        spawnWeaponPowerUpManager.GetComponent<SpawnWeaponPowerUpManager>().IsGameStarted = true;
+        BossOne.GetComponent<NavMeshAgent>().speed = 2.5f;
+        BossTwo.GetComponent<NavMeshAgent>().speed = 2;
         MainMenuScenePrefab.SetActive(false);
         TitleScenePrefab.SetActive(false);
+        TimerUICanvas.SetActive(true);
+        CameraStuff.SetActive(true);
     }
 }

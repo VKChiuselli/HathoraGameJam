@@ -10,6 +10,10 @@ public class ChairFollow : MonoBehaviour
 
     private void Update()
     {
+        if (sphereTransform == null)
+        {
+            return;
+        }
         if (transform.position.y > 0)
         {
             transform.position = new Vector3(transform.position.x, 0, transform.position.z);

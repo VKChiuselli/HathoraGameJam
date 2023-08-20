@@ -36,35 +36,19 @@ public class RoomPollingNetwork : NetworkBehaviour
 
     private void RefreshNames()
     {
-        SetName();
-    }
-
-    public void SetName()
-    {
         SetNameServerRpc(PlayerPrefs.GetString("Name"));
     }
-
-    public void ChangeScene()
-    {
-
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        //if (IsClient && IsOwner)
-        //{
-        //    SetNameServerRpc(PlayerPrefs.GetString("Name"));
-        //}
-    }
-
+  
 
     [ServerRpc(RequireOwnership = false)]
     public void StartGameServerRpc()
     {
         bool areAllPlayerReady = CheckDictionary();
 
+      
         if (areAllPlayerReady)
         {
+            StartGameOfficially();
             StartGameClientRpc();
         }
         else
@@ -97,6 +81,11 @@ public class RoomPollingNetwork : NetworkBehaviour
 
     [ClientRpc]
     private void StartGameClientRpc()
+    {
+        StartGameOfficially();
+    }
+
+    private void StartGameOfficially()
     {
         ScenePrefabManager.GetComponent<ScenePrefabManager>().StartGame();
     }
