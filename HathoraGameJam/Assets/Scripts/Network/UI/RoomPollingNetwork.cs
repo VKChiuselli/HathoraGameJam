@@ -108,7 +108,7 @@ public class RoomPollingNetwork : NetworkBehaviour
         }
         else
         {
-            PlayerPrefs.SetString("Name", PlayerPrefs.GetString("Name") + "  is Ready");
+            PlayerPrefs.SetString("Name", PlayerPrefs.GetString("Name") + " is Ready");
             ReadyGameServerRpc(PlayerPrefs.GetString("Name"));
         }
 

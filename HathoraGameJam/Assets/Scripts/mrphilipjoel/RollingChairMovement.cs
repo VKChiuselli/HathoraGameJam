@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -67,6 +68,12 @@ namespace HathoraGameJam.CubicleEscape
            
             }
 
+        }
+
+     public   Animator playerAnimator;
+        public void SetPlayerAnimatorCaught(bool animatorBool)
+        {
+            playerAnimator.SetBool("Caught", animatorBool);
         }
     }
 }

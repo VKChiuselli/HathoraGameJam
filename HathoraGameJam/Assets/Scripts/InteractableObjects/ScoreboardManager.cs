@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+
 public class ScoreboardManager : NetworkBehaviour
 {
 
@@ -13,21 +15,26 @@ public class ScoreboardManager : NetworkBehaviour
     [SerializeField] TextMeshProUGUI FinalScoreBoardText;
     [SerializeField] GameObject FinalScorePanel;
     [SerializeField] GameObject ScoreBoardPanel;
+    [SerializeField] Button PlayAgainButton;
 
     private PlayerScoreUI[] playerScoreUIs = new PlayerScoreUI[8];
 
 
     public static ScoreboardManager Instance { get; private set; }
 
-
-
     private void Awake()
     {
         Instance = this;
-
+        PlayAgainButton.onClick.AddListener(PlayAgain);
         playerPointsDictionary = new Dictionary<ulong, int>();
     }
 
+    void PlayAgain()
+    {
+        System.Diagnostics.Process.Start(Application.dataPath.Replace("_Data", ".exe")); //new program
+
+        Application.Quit(); //kill current process
+    }
 
     public void SetPlayerPoints(int updatedAmount)
     {
@@ -37,6 +44,7 @@ public class ScoreboardManager : NetworkBehaviour
 
     public void ShowFinalScore()
     {
+        Time.timeScale = 0;
         ShowFinalScoreClientRpc();
 
     }
@@ -47,6 +55,7 @@ public class ScoreboardManager : NetworkBehaviour
         FinalScorePanel.SetActive(true);
         //FinalScoreBoardText.text = ScoreBoardUIText.text;
         ScoreBoardPanel.SetActive(false);
+        Time.timeScale = 0;
         //TODO create a function that orders the highest score to the lowest
     }
 

@@ -17873,6 +17873,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1691621819
       objectReference: {fileID: 0}
+    - target: {fileID: 2263467413454495898, guid: 29e0a0b82051b024b976478ab2b33c05, type: 3}
+      propertyPath: PlayAgainButton
+      value: 
+      objectReference: {fileID: 1481173014}
     - target: {fileID: 3408759536694959786, guid: 29e0a0b82051b024b976478ab2b33c05, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -24828,6 +24832,7 @@ MonoBehaviour:
   - {fileID: 8603981842170263040, guid: 91c663d308a79cd43b1b465e06eb71fb, type: 3}
   - {fileID: 1284210060167302, guid: fd6d2cfc187f8f14b8ed0e423ff0c44a, type: 3}
   spawnDelay: 5
+  IsGameStarted: 0
 --- !u!114 &1272145847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28001,6 +28006,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4797593861707532, guid: 1610cb72fa689a8419fbdd98c4ada93c, type: 3}
   m_PrefabInstance: {fileID: 1479692683}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1481173014 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9192725901035331265, guid: 29e0a0b82051b024b976478ab2b33c05, type: 3}
+  m_PrefabInstance: {fileID: 857676232}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1489453250
 PrefabInstance:
   m_ObjectHideFlags: 0

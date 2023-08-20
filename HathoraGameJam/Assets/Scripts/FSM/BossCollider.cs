@@ -66,7 +66,9 @@ public class BossCollider : NetworkBehaviour
     float bossStopDuration = 7f;
     IEnumerator StopBoss()
     {
+
         transform.parent.gameObject.GetComponent<NavMeshAgent>().speed =0f;
+        transform.parent.gameObject.GetComponent<SFX>().PlayFirstEffect();
         transform.parent.gameObject.GetComponent<BaseStateMachine>().enabled = false;
         transform.parent.gameObject.GetComponent<BossAnimationController>().SetAnimator(true);
         yield return new WaitForSeconds(bossStopDuration);
@@ -79,7 +81,9 @@ public class BossCollider : NetworkBehaviour
     IEnumerator StopPlayer(GameObject playerCaught)
     {
         playerCaught.gameObject.GetComponent<RollingChairMovement>().moveState = RollingChairMovement.MoveState.Stun;
+        playerCaught.gameObject.GetComponent<RollingChairMovement>().SetPlayerAnimatorCaught(true);
         yield return new WaitForSeconds(playerCaughtStopDuration);
+        playerCaught.gameObject.GetComponent<RollingChairMovement>().SetPlayerAnimatorCaught(false);
         playerCaught.gameObject.GetComponent<RollingChairMovement>().moveState = RollingChairMovement.MoveState.Normal;
 
     }

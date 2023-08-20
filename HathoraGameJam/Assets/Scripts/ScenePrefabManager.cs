@@ -18,12 +18,15 @@ public class ScenePrefabManager : MonoBehaviour
     [SerializeField] GameObject CameraStuff;
     public GameObject MainCameraTitleScene;
     [SerializeField]  GameObject MainCameraGame;
+    [SerializeField]  GameObject AudioSourceManager;
+
 
     void Start()
     {
         TitleScenePrefabPlayButton.onClick.AddListener(GoToMainMenuScenePrefab);
         TitleScenePrefab.SetActive(true);
         MainMenuScenePrefab.SetActive(false);
+        AudioSourceManager.GetComponent<SFX>().PlayFirstEffect();
     }
 
     private void GoToMainMenuScenePrefab()
@@ -44,5 +47,7 @@ public class ScenePrefabManager : MonoBehaviour
         TimerUICanvas.GetComponent<TimerUI>().isGameStarted = true;
         CameraStuff.SetActive(true);
         MainCameraGame.SetActive(true);
+        AudioSourceManager.GetComponent<SFX>().StopFirstEffect();
+        AudioSourceManager.GetComponent<SFX>().PlaySecondEffect();
     }
 }

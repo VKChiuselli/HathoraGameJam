@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0006aff52805d84a961a2ddc73a38bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstEffect: {fileID: 0}
+  firstEffect: {fileID: 8300000, guid: b894809debd3dd14598cd4c028d3274e, type: 3}
   secondEffect: {fileID: 8300000, guid: 490b1fbeb8e8d1e4f938129412c56d82, type: 3}
   thirdEffect: {fileID: 8300000, guid: 9907e2c216687894d888d8d34fd9a680, type: 3}
   severalEffects: []
@@ -358,8 +358,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.243
   m_Pitch: 1
   Loop: 0
   Mute: 0
