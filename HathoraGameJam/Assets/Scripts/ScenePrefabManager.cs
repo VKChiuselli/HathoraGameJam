@@ -38,7 +38,7 @@ public class ScenePrefabManager : MonoBehaviour
         BossTwo.GetComponent<NavMeshAgent>().speed = 2;
         MainMenuScenePrefab.SetActive(false);
         TitleScenePrefab.SetActive(false);
-        TimerUICanvas.SetActive(true);
+        TimerUICanvas.GetComponent<TimerUI>().isGameStarted = true;
         CameraStuff.SetActive(true);
     }
 }

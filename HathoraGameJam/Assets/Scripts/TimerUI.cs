@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class TimerUI : NetworkBehaviour
 {
-    [SerializeField]    private TextMeshProUGUI timerText;
-    [SerializeField]    private GameObject ScoreBoardManagerCanvas;
+    [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private GameObject ScoreBoardManagerCanvas;
 
-    private float gameTime = 2 * 60;
-    private NetworkVariable<int> timeRemaining = new NetworkVariable<int>(3 * 10);
-
+    private float gameTime = 3 * 60;
+    private NetworkVariable<int> timeRemaining = new NetworkVariable<int>(3 * 60);
+    public bool isGameStarted;
 
     public override void OnNetworkSpawn()
     {
@@ -31,6 +31,10 @@ public class TimerUI : NetworkBehaviour
 
     void Update()
     {
+        if (!isGameStarted)
+        {
+            return;
+        }
         if (IsServer)
         {
 
@@ -50,14 +54,14 @@ public class TimerUI : NetworkBehaviour
 
         }
 
-        if (IsClient  )
+        if (IsClient)
         {
             ShowTimerOnText(timeRemaining.Value);
-       
+
         }
 
 
     }
 
- 
+
 }
