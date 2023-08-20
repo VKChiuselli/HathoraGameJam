@@ -92,9 +92,10 @@ public class PlayerManager : NetworkBehaviour
     IEnumerator Speed()
     {
         BonusActiveText.gameObject.SetActive(true);
-        BonusActiveText.text = "Speed boost activated!!!";
+    transform.GetChild(2).gameObject.SetActive(true);
         GetComponent<RollingChairMovement>().moveState = MoveState.DoubleSpeed;
         yield return new WaitForSeconds(speedDuration);
+        transform.GetChild(2).gameObject.SetActive(false);
         GetComponent<RollingChairMovement>().moveState = MoveState.Normal;
         BonusActiveText.gameObject.SetActive(false);
     }

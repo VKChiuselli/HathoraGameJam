@@ -88,6 +88,9 @@ public class PlayerUseItem : NetworkBehaviour
         }
     }
 
+
+    public GameObject VfxInvisibility;
+
     private void InvisibilityAttack()
     {
         GetComponent<SFX>().PlaySecondEffect();
@@ -116,7 +119,11 @@ public class PlayerUseItem : NetworkBehaviour
     IEnumerator SetTag(GameObject player)
     {
         player.tag = "Immortal";
+        player.transform.GetChild(1).gameObject.SetActive(true);
+
         yield return new WaitForSeconds(inviDuration);
+        player.transform.GetChild(1).gameObject.SetActive(false);
+
         player.tag = "Player";
 
     }
